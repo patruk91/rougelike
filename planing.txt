@@ -1,0 +1,88 @@
+Menu:
+    - aski art (nice to have)
+    - print manu
+    - get option from user
+    - validate option from user
+    - call option
+
+    play game:
+        - character creation:
+            - starting stats: dict{"HP" start 75,max 100
+                                   "DEF" start 0
+                                   "ATC" start 1
+                                   "EXP" start 0
+                                   "LVL" start 1
+                                   }
+            - free points: 5 points
+            - print manual
+            - ask user for input
+            - validate input
+            - change stats:
+                "HP" increment by 5
+                "DEF" imcrement by 1
+                "ATC" increment by 1
+        - Map:
+            - start game with start time to variable
+            - map in txt file (22x22 min):
+                    - # wall
+                    - @ hero - starting position 
+                    - & enemy - 5
+                    - F foos - min 1
+                    - D doors - min 1
+                            add lvlup
+                            at level 4 D is BOSS fight
+                    - W weapon - min 1
+                    - R river
+                    - C clothes - min 1
+                    - B bushes
+    
+            - get map from file (list of lists)
+        - Movement:
+            - WSAD
+            - character placement kept in map
+            - validate new location if movement can be dome
+                    - #, R, B charanter can't move there
+                    - if can't move go back to prevoious location
+            - validate what was at new haracter location:
+                    - F - add item to inventory at 100HP or update HP
+                    - W - add item to inventory and add ATC to statistics
+                    - C - add item to inventory and add DEF to statistics
+                    - D - load next level
+                    - & - begin fight with monster
+        - Fight:
+                - hot cold game
+                        - generate random number 1 to 50
+                        - ask user to guess number
+                - get answer from user
+                - validate answer if is digit
+                - validate if is number to guess
+                - wrong answer -5 HP(normal mob) -10 HP(boss)
+                - correct guess win fight (normal mob) increment characte["EXP"] by 2
+                - 3x correct guess to win with boss
+        - Win/loose screen:
+                Win if at map 4 user win boss fight
+                Loose when character HP is <= 0
+                - end time to variable
+                - load asci art from file
+                - game statisticts:
+                        convert EXP to PTS (1 EXP = 1 PTS)
+                        get finish time
+                - press enter to return to main menu or 0 to exit app
+
+
+
+
+map UI:
+    - character statistics
+    - map
+    - chosing options
+    - map legend
+fight UI:
+    - asci art (normal mob, boss)
+    - character statistics
+    - guess instruction
+    - guess input
+Win/Loose screen UI:
+    - asci art (Win/loose)
+    - game statistics (PTS fro EXP, time)
+    - press enter to return to main menu or 0 to exit app
