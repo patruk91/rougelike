@@ -16,32 +16,64 @@ def get_char_in_terminal():
 
 
 def movement():
-    level = [["@", " ", " ", " ", " ", ], [" ", " ", " ", " ", " ", ]]  # + [[" ", " ", " ", " ", " ", ]] * 10
-    print(level)
+    map_level = [["@", " ", " ", " ", " ", ], [" ", " ", " ", " ", " ", ], [" ", " ", " ", " ", " ", ], [" ", " ", " ", " ", " ", ] ,[" ", " ", " ", " ", " ", ]]
+    print(map_level)
     while True:
         # hero_indice = [column, row]
         get_char = get_char_in_terminal()
         if get_char == "d":
             MOVE_RIGHT = 1
-            level = move_horizontally(level, MOVE_RIGHT)
+            map_level = move_horizontally(map_level, MOVE_RIGHT)
         elif get_char == "a":
             MOVE_LEFT = -1
-            level = move_horizontally(level, MOVE_LEFT)
+            map_level = move_horizontally(map_level, MOVE_LEFT)
+        elif get_char == "w":
+            MOVE_UP = -1
+            move_vertically(map_level, MOVE_UP)
+        elif get_char == "s":
+            MOVE_DOWN = 1
+            move_vertically(map_level, MOVE_DOWN)
+
         if get_char == "q":
             exit()
 
 
-def move_horizontally(level, move):
-    hero_indice = [[line.index("@"), level.index(line)] for line in level if "@" in line][0]
-    updated_hero_indice = hero_indice[0] + move
-    for horizontal in level:
-        if "@" in horizontal:
-            for indice in range(len(horizontal)):
-                horizontal[indice] = " "
-                horizontal[updated_hero_indice] = "@"
+def move_horizontally(map_level, move):
+    hero_position = get_hero_position(map_level)
+    x_position = hero_position[0]
+    y_position = hero_position[1]
+    map_level[y_position][x_position] = " "
 
-    print(level)
-    return level
+    # update position in list
+    x_position += move
+    map_level[y_position][x_position] = "@"
+    print_some(map_level)
+    return map_level
+
+
+def move_vertically(map_level, move):
+    hero_position = get_hero_position(map_level)
+    x_position = hero_position[0]
+    y_position = hero_position[1]
+    map_level[y_position][x_position] = " "
+
+    # update position in list
+    y_position += move
+    map_level[y_position][x_position] = "@"
+    print_some(map_level)
+    return map_level
+
+
+def get_hero_position(map_level):
+    position = [[line.index("@"), map_level.index(line)] for line in map_level if "@" in line][0]
+    print(position)
+    return position
+
+
+def print_some(level):
+    for line in level:
+        print(line)
+
 # x = get_char_in_terminal()
 # print(x)
 print(movement())
