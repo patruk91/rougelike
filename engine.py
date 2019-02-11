@@ -22,23 +22,26 @@ def movement():
         # hero_indice = [column, row]
         get_char = get_char_in_terminal()
         if get_char == "d":
-            level = move_right(level)
+            MOVE_RIGHT = 1
+            level = move_horizontally(level, MOVE_RIGHT)
+        elif get_char == "a":
+            MOVE_LEFT = -1
+            level = move_horizontally(level, MOVE_LEFT)
         if get_char == "q":
             exit()
 
 
-def move_right(level):
+def move_horizontally(level, move):
     hero_indice = [[line.index("@"), level.index(line)] for line in level if "@" in line][0]
-    hero_indice[0] += 1
-    for line in level:
-        for i in range(len(line)):
-            if line[i] == "@":
-                line[i] = " "
-                line[hero_indice[0]] = "@"
-            else:
-                line[i] = " "
-        print(level)
-        return level
+    updated_hero_indice = hero_indice[0] + move
+    for horizontal in level:
+        if "@" in horizontal:
+            for indice in range(len(horizontal)):
+                horizontal[indice] = " "
+                horizontal[updated_hero_indice] = "@"
+
+    print(level)
+    return level
 # x = get_char_in_terminal()
 # print(x)
 print(movement())
