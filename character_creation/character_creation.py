@@ -3,7 +3,6 @@ import common
 
 
 def create_character(points):
-    points = 5
     statistics = {"HP": 75, "DEF": 0, "ATC": 1, "EXP": 0, "LVL": 1}
     ui.show_character_creation_screen(statistics, points)
 
