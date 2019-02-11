@@ -1,3 +1,6 @@
+import data_manager
+
+
 def menu():
     print("Rougelike Menu")
     print("1. Start Game")
@@ -12,5 +15,5 @@ def menu():
         #odpalamy highscore
     else:
         exit()
-
+    
 menu()
