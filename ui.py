@@ -19,3 +19,13 @@ def get_string_input(question):
 
 def print_error(message):
     print("ERROR: " + message)
+
+
+def menu_option():
+    print("""
+        (1)Play Game
+        (2)Highscore
+        (3)Sth
+        (4)UpdaExit Game""")
+    answer = input("Choose number: ")
+    return answer
