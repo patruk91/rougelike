@@ -22,10 +22,10 @@ def print_error(message):
 
 
 def menu_option():
-    print("""
-        (1)Play Game
-        (2)Highscore
-        (3)Sth
-        (4)UpdaExit Game""")
+    print("""Rougelike Menu
+(1)Play Game
+(2)Highscore
+(3)Sth
+(4)Exit Game""")
     answer = input("Choose number: ")
     return answer
