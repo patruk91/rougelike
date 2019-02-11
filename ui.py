@@ -29,3 +29,8 @@ def menu_option():
         (4)UpdaExit Game""")
     answer = input("Choose number: ")
     return answer
+
+
+def print_character_statistics(char_stats):
+    string = "HP:{:>5}\tDEF:{:>5}\tATC:{:>5}\tEXP:{:>5}\tLVL:{:>5}"
+    print(string.format(*char_stats.values()))
