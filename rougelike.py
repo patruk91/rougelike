@@ -1,4 +1,5 @@
 import data_manager
+import character_creation
 
 
 def menu():
@@ -8,8 +9,7 @@ def menu():
     print("3. Exit Game")
     ask_user_for_data = int(input("Choose what do u want to do!: "))
     if ask_user_for_data == 1:
-        pass
-        #odpalamy gierke
+        char_stats = character_creation.create_character()
     elif ask_user_for_data == 2:
         pass
         #odpalamy highscore
