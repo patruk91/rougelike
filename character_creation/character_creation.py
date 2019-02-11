@@ -2,12 +2,12 @@ import ui
 import common
 
 
-def create_character():
-    FREE_POINTS = 5
-    statistics = {"HP": 75, "DEF": 0, "ATC": 1}
-    ui.show_character_creation_screen(statistics, FREE_POINTS)
+def create_character(points):
+    points = 5
+    statistics = {"HP": 75, "DEF": 0, "ATC": 1, "EXP": 0, "LVL": 1}
+    ui.show_character_creation_screen(statistics, points)
 
-    while FREE_POINTS > 0:
+    while points > 0:
         is_answer_correct = False
         while not is_answer_correct:
             stat_to_add = ui.get_string_input("Enter 'H', 'h', 'D', 'd' or 'A', 'a' to add statistic: ")
@@ -18,7 +18,7 @@ def create_character():
             statistics["DEF"] += 1
         elif stat_to_add in ["A", "a"]:
             statistics["ATC"] += 1
-        ui.show_character_creation_screen(statistics, FREE_POINTS)
-        FREE_POINTS -= 1
+        ui.show_character_creation_screen(statistics, points)
+        points -= 1
 
     return statistics
