@@ -8,6 +8,7 @@ filename = "levels/Level1.txt"
 MOVE_ADD = 1
 MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
+MOVE = [MOVE_ADD, MOVE_SUB]
 
 
 def get_char_in_terminal():
@@ -35,20 +36,15 @@ def movement():
         os.system('clear')
 
         if get_char == "d":
-            level_map = move_horizontally(get_char, level_map, MOVE_ADD, hero_coordinates)
-            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_ADD)
-
+            level_map = move_horizontally(get_char, level_map, MOVE, hero_coordinates)
         elif get_char == "a":
-            level_map = move_horizontally(get_char, level_map, MOVE_SUB, hero_coordinates)
-            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_SUB)
-
+            level_map = move_horizontally(get_char, level_map, MOVE, hero_coordinates)
         elif get_char == "w":
-            move_vertically(get_char, level_map, MOVE_SUB, hero_coordinates)
-            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_SUB)
-
+            move_vertically(get_char, level_map, MOVE, hero_coordinates)
         elif get_char == "s":
-            move_vertically(get_char, level_map, MOVE_ADD, hero_coordinates)
-            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_ADD)
+            move_vertically(get_char, level_map, MOVE, hero_coordinates)
+
+        hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE)
 
 
 def move_horizontally(get_char, level_map, move, hero_position):
@@ -86,10 +82,18 @@ def place_new_hero_position(level_map, hero_updated_position):
 def update_hero_coordinates(get_char, hero_position, move):
     x_position = hero_position[0]
     y_position = hero_position[1]
-    if get_char in ["d", "a"]:
-        x_position += move
-    elif get_char in ["w", "s"]:
-        y_position += move
+    move_add = move[0]
+    move_sub = move[1]
+
+    if get_char == "d":
+        x_position += move_add
+    elif get_char == "a":
+        x_position += move_sub
+    elif get_char == "w":
+        y_position += move_sub
+    elif get_char == "s":
+        y_position += move_add
+    print(x_position, y_position)
     return [x_position, y_position]
 
 
