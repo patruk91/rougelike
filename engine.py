@@ -5,7 +5,6 @@ import data_manager
 import ui
 
 
-filename = "levels/level1.txt"
 MOVE_ADD = 1
 MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
@@ -32,7 +31,7 @@ def get_char_in_terminal():
     return char
 
 
-def handle_movement():
+def handle_movement(filename):
     """
     Main function to handle hero movement. Hero can move by pressing
     keys: "w", "a", "s", "d".
@@ -40,15 +39,18 @@ def handle_movement():
     level_map = data_manager.get_maps_from_file(filename)
     old_hero_coordinates = HERO_BEGIN_POSITION
     level_map[old_hero_coordinates[1]][old_hero_coordinates[0]] = "@"
+    # place hero on map by coordinates
+
     ui.display_level_map(level_map)
     get_char = ""
+
     while get_char != "q":
         get_char = get_char_in_terminal()
         os.system('clear')
         new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
         if check_if_impassable(new_hero_coordinates, level_map):
-            character = check_if_item_interaction(new_hero_coordinates, level_map)
-            trigger_interaction(character)
+            if check_if_item_interaction(new_hero_coordinates, level_map):
+                trigger_interaction(new_hero_coordinates, level_map)
             updated_level_map = update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates)
             old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
             ui.display_level_map(updated_level_map)
@@ -154,22 +156,26 @@ def check_if_impassable(updated_pos, level_map):
 def check_if_item_interaction(new_hero_coordinates, level_map):
     x_position = new_hero_coordinates[0]
     y_position = new_hero_coordinates[1]
-    return level_map[y_position][x_position]
+    if level_map[y_position][x_position] in INTERACTION_ELEMENTS:
+        return True
+    return False
 
 
-def trigger_interaction(character):
-    if character in INTERACTION_ELEMENTS:
-        if character == "W":
-            pass
-        elif character == "F":
-            pass
-        elif character == "C":
-            pass
-        elif character == "&":
-            pass
-        elif character == "D":
-            pass
+def trigger_interaction(new_hero_coordinates, level_map):
+    x_position = new_hero_coordinates[0]
+    y_position = new_hero_coordinates[1]
+    character = level_map[y_position][x_position]
+    if character == "W":
+        pass
+    elif character == "F":
+        pass
+    elif character == "C":
+        pass
+    elif character == "&":
+        pass
+    elif character == "D":
+        pass
 
 # x = get_char_in_terminal()
 # print(x)
-# print(handle_movement())
+print(handle_movement(filename = 'levels/level1.txt'))

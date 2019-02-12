@@ -6,6 +6,8 @@ import os
 import engine
 
 
+filename = 'levels/level1.txt'
+
 def menu():
     os.system('clear')
     while True:
@@ -15,9 +17,9 @@ def menu():
             if answer == "1":
                 char_stats = char_cr.create_character(5)
                 os.system('clear')
-                data_manager.get_maps_from_file('levels/level1.txt')
+                data_manager.get_maps_from_file(filename)
                 ui.print_character_statistics(char_stats)
-                engine.handle_movement()
+                engine.handle_movement(filename)
             elif answer == "2":
                 pass
             elif answer == "3":
