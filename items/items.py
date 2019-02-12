@@ -6,10 +6,12 @@ def weapons():
 
 def food():
     food_list = [("ham", 6), ("meat", 4), ("melon", 2), ("apple", 1),
-                    ("cake", 5), ("sweets", 2)]
+                 ("cake", 5), ("sweets", 2)]
     return food_list
 
 
-
 def clotches():
-    pass
+    clothes_list = [("brass helmet", 3), ("rainbow shield", 15),
+                    ("doran shield", 2), ("plate armor", 5),
+                    ("steel boots", 4), ("golden legs", 8)]
+    return clothes_list
