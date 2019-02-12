@@ -17,7 +17,7 @@ def menu():
                 os.system('clear')
                 data_manager.get_maps_from_file('levels/level1.txt')
                 ui.print_character_statistics(char_stats)
-                engine.handle_movement()
+                engine.handle_movement(char_stats)
             elif answer == "2":
                 pass
             elif answer == "3":

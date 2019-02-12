@@ -32,7 +32,7 @@ def get_char_in_terminal():
     return char
 
 
-def handle_movement():
+def handle_movement(char_stats):
     """
     Main function to handle hero movement. Hero can move by pressing
     keys: "w", "a", "s", "d".
@@ -48,7 +48,7 @@ def handle_movement():
         new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
         if check_if_impassable(new_hero_coordinates, level_map):
             character = check_if_item_interaction(new_hero_coordinates, level_map)
-            trigger_interaction(character)
+            trigger_interaction(character, char_stats)
             updated_level_map = update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates)
             old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
             ui.display_level_map(updated_level_map)
@@ -157,7 +157,7 @@ def check_if_item_interaction(new_hero_coordinates, level_map):
     return level_map[y_position][x_position]
 
 
-def trigger_interaction(character):
+def trigger_interaction(character, char_stats):
     if character in INTERACTION_ELEMENTS:
         if character == "W":
             pass
