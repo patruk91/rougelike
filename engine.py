@@ -26,8 +26,8 @@ def get_char_in_terminal():
 
 def movement():
     level_map = data_manager.get_maps_from_file(filename)
-    position = HERO_BEGIN_POSITION
-    level_map[position[1]][position[0]] = "@"
+    hero_coordinates = HERO_BEGIN_POSITION
+    level_map[hero_coordinates[1]][hero_coordinates[0]] = "@"
     print_some(level_map)
     get_char = ""
     while get_char != "q":
@@ -35,57 +35,55 @@ def movement():
         os.system('clear')
 
         if get_char == "d":
-            level_map = move_horizontally(get_char, level_map, MOVE_ADD, position)
-            position = update(get_char, position, MOVE_ADD)
+            level_map = move_horizontally(get_char, level_map, MOVE_ADD, hero_coordinates)
+            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_ADD)
 
         elif get_char == "a":
-            level_map = move_horizontally(get_char, level_map, MOVE_SUB, position)
-            position = update(get_char, position, MOVE_SUB)
+            level_map = move_horizontally(get_char, level_map, MOVE_SUB, hero_coordinates)
+            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_SUB)
 
         elif get_char == "w":
-            move_vertically(get_char, level_map, MOVE_SUB, position)
-            position = update(get_char, position, MOVE_SUB)
+            move_vertically(get_char, level_map, MOVE_SUB, hero_coordinates)
+            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_SUB)
 
         elif get_char == "s":
-            move_vertically(get_char, level_map, MOVE_ADD, position)
-            position = update(get_char, position, MOVE_ADD)
+            move_vertically(get_char, level_map, MOVE_ADD, hero_coordinates)
+            hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE_ADD)
 
 
 def move_horizontally(get_char, level_map, move, hero_position):
-    clean_map = clean_map_from_old_hero_position(level_map, hero_position)
-    hero_updated_position = update(get_char, hero_position, move)
-
-    updated_level_map = update_map_from_old_hero_position(clean_map, hero_updated_position)
+    erase_hero = erase_old_hero_position(level_map, hero_position)
+    updated_pos = update_hero_coordinates(get_char, hero_position, move)
+    updated_level_map = place_new_hero_position(erase_hero, updated_pos)
 
     print_some(updated_level_map)
     return updated_level_map
 
 
 def move_vertically(get_char, level_map, move, hero_position):
-    clean_map = clean_map_from_old_hero_position(level_map, hero_position)
-    hero_updated_position = update(get_char, hero_position, move)
-
-    updated_level_map = update_map_from_old_hero_position(clean_map, hero_updated_position)
+    erase_hero = erase_old_hero_position(level_map, hero_position)
+    updated_pos = update_hero_coordinates(get_char, hero_position, move)
+    updated_level_map = place_new_hero_position(erase_hero, updated_pos)
 
     print_some(updated_level_map)
     return updated_level_map
 
 
-def clean_map_from_old_hero_position(level_map, hero_position):
+def erase_old_hero_position(level_map, hero_position):
     x_position = hero_position[0]
     y_position = hero_position[1]
     level_map[y_position][x_position] = " "
     return level_map
 
 
-def update_map_from_old_hero_position(level_map, hero_updated_position):
+def place_new_hero_position(level_map, hero_updated_position):
     x_position = hero_updated_position[0]
     y_position = hero_updated_position[1]
     level_map[y_position][x_position] = "@"
     return level_map
 
 
-def update(get_char, hero_position, move):
+def update_hero_coordinates(get_char, hero_position, move):
     x_position = hero_position[0]
     y_position = hero_position[1]
     if get_char in ["d", "a"]:
