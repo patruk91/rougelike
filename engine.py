@@ -5,7 +5,7 @@ import data_manager
 import ui
 
 
-filename = "levels/Level1.txt"
+filename = "levels/level1.txt"
 MOVE_ADD = 1
 MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
@@ -149,8 +149,3 @@ def check_if_impassable(updated_pos, level_map):
     if level_map[y_position][x_position] in IMPASSABLE_ELEMENTS:
         return False
     return True
-
-
-# x = get_char_in_terminal()
-# print(x)
-print(handle_movement())
