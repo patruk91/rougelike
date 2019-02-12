@@ -10,6 +10,8 @@ MOVE_ADD = 1
 MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
 MOVE = [MOVE_ADD, MOVE_SUB]
+IMPASSABLE_ELEMENTS = ["#", "B", "R"]
+INTERACTION_ELEMENTS = ["W", "F", "C", "&", "D"]
 
 
 def get_char_in_terminal():
@@ -43,27 +45,24 @@ def handle_movement():
     while get_char != "q":
         get_char = get_char_in_terminal()
         os.system('clear')
+        new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
+        if check_if_impassable(new_hero_coordinates, level_map):
+            character = check_if_item_interaction(new_hero_coordinates, level_map)
+            trigger_interaction(character)
+            updated_level_map = update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates)
+            old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
+            ui.display_level_map(updated_level_map)
+        else:
+            ui.display_level_map(level_map)
 
-        if get_char in ["a", "d"]:
-            new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
-            if check_if_impassable(new_hero_coordinates, level_map):
-                character = check_if_item_interaction(new_hero_coordinates, level_map)
-                trigger_intertaction(character)
-                level_map = move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates)
-                old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
 
-            else:
-                ui.display_level_map(level_map)
-
-        elif get_char in ["s", "w"]:
-            new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
-            if check_if_impassable(new_hero_coordinates, level_map):
-                character = check_if_item_interaction(new_hero_coordinates, level_map)
-                trigger_intertaction(character)
-                move_vertically(level_map, old_hero_coordinates, new_hero_coordinates)
-                old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
-            else:
-                ui.display_level_map(level_map)
+def update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates):
+    if get_char in ["a", "d"]:
+        updated_level_map = move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates)
+        return updated_level_map
+    elif get_char in ["s", "w"]:
+        updated_level_map = move_vertically(level_map, old_hero_coordinates, new_hero_coordinates)
+        return updated_level_map
 
 
 def move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates):
@@ -77,7 +76,6 @@ def move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates):
     """
     erase_hero = erase_old_hero_position(level_map, old_hero_coordinates)
     updated_level_map = place_new_hero_position(erase_hero, new_hero_coordinates)
-    ui.display_level_map(updated_level_map)
     return updated_level_map
 
 
@@ -92,7 +90,6 @@ def move_vertically(level_map, old_hero_coordinates, new_hero_coordinates):
     """
     erase_hero = erase_old_hero_position(level_map, old_hero_coordinates)
     updated_level_map = place_new_hero_position(erase_hero, new_hero_coordinates)
-    ui.display_level_map(updated_level_map)
     return updated_level_map
 
 
@@ -147,7 +144,6 @@ def update_hero_coordinates(get_char, hero_position, move):
 
 
 def check_if_impassable(updated_pos, level_map):
-    IMPASSABLE_ELEMENTS = ["#", "B", "R"]
     x_position = updated_pos[0]
     y_position = updated_pos[1]
     if level_map[y_position][x_position] in IMPASSABLE_ELEMENTS:
@@ -161,8 +157,7 @@ def check_if_item_interaction(new_hero_coordinates, level_map):
     return level_map[y_position][x_position]
 
 
-def trigger_intertaction(character):
-    INTERACTION_ELEMENTS = ["W", "F", "C", "&", "D"]
+def trigger_interaction(character):
     if character in INTERACTION_ELEMENTS:
         if character == "W":
             pass
@@ -177,4 +172,4 @@ def trigger_intertaction(character):
 
 # x = get_char_in_terminal()
 # print(x)
-# print(handle_movement())
+print(handle_movement())
