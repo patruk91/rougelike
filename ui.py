@@ -22,10 +22,15 @@ def print_error(message):
 
 
 def menu_option():
-    print("""
-        (1)Play Game
-        (2)Highscore
-        (3)Sth
-        (4)UpdaExit Game""")
+    print("""Rougelike Menu
+(1)Play Game
+(2)Highscore
+(3)Sth
+(4)Exit Game""")
     answer = input("Choose number: ")
     return answer
+
+
+def print_character_statistics(char_stats):
+    string = "HP:{:>5}\tDEF:{:>5}\tATC:{:>5}\tEXP:{:>5}\tLVL:{:>5}"
+    print(string.format(*char_stats.values()))
