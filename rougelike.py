@@ -6,6 +6,7 @@ import os
 
 
 def menu():
+    data_manager.load_asci_art("asci_art/menu_art.txt")
     while True:
         answer = ui.menu_option()
         if common.validate_string_input(answer, condition=["1", "2", "3", "4"]):
@@ -19,3 +20,5 @@ def menu():
                 pass
             elif answer == "4":
                 exit()
+
+menu()
