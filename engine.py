@@ -1,4 +1,13 @@
+import os
 
+
+import data_manager
+
+
+filename = "levels/Level1.txt"
+MOVE_ADD = 1
+MOVE_SUB = -1
+HERO_BEGIN_POSITION = [1, 20]
 
 
 def get_char_in_terminal():
@@ -16,58 +25,74 @@ def get_char_in_terminal():
 
 
 def movement():
-    map_level = [["@", " ", " ", " ", " ", ], [" ", " ", " ", " ", " ", ], [" ", " ", " ", " ", " ", ], [" ", " ", " ", " ", " ", ] ,[" ", " ", " ", " ", " ", ]]
-    print(map_level)
-    while True:
-        # hero_indice = [column, row]
+    level_map = data_manager.get_maps_from_file(filename)
+    position = HERO_BEGIN_POSITION
+    level_map[position[1]][position[0]] = "@"
+    print_some(level_map)
+    get_char = ""
+    while get_char != "q":
         get_char = get_char_in_terminal()
+        os.system('clear')
+
         if get_char == "d":
-            MOVE_RIGHT = 1
-            map_level = move_horizontally(map_level, MOVE_RIGHT)
+            level_map = move_horizontally(get_char, level_map, MOVE_ADD, position)
+            position = update(get_char, position, MOVE_ADD)
+
         elif get_char == "a":
-            MOVE_LEFT = -1
-            map_level = move_horizontally(map_level, MOVE_LEFT)
+            level_map = move_horizontally(get_char, level_map, MOVE_SUB, position)
+            position = update(get_char, position, MOVE_SUB)
+
         elif get_char == "w":
-            MOVE_UP = -1
-            move_vertically(map_level, MOVE_UP)
+            move_vertically(get_char, level_map, MOVE_SUB, position)
+            position = update(get_char, position, MOVE_SUB)
+
         elif get_char == "s":
-            MOVE_DOWN = 1
-            move_vertically(map_level, MOVE_DOWN)
-
-        if get_char == "q":
-            exit()
+            move_vertically(get_char, level_map, MOVE_ADD, position)
+            position = update(get_char, position, MOVE_ADD)
 
 
-def move_horizontally(map_level, move):
-    hero_position = get_hero_position(map_level)
+def move_horizontally(get_char, level_map, move, hero_position):
+    clean_map = clean_map_from_old_hero_position(level_map, hero_position)
+    hero_updated_position = update(get_char, hero_position, move)
+
+    updated_level_map = update_map_from_old_hero_position(clean_map, hero_updated_position)
+
+    print_some(updated_level_map)
+    return updated_level_map
+
+
+def move_vertically(get_char, level_map, move, hero_position):
+    clean_map = clean_map_from_old_hero_position(level_map, hero_position)
+    hero_updated_position = update(get_char, hero_position, move)
+
+    updated_level_map = update_map_from_old_hero_position(clean_map, hero_updated_position)
+
+    print_some(updated_level_map)
+    return updated_level_map
+
+
+def clean_map_from_old_hero_position(level_map, hero_position):
     x_position = hero_position[0]
     y_position = hero_position[1]
-    map_level[y_position][x_position] = " "
-
-    # update position in list
-    x_position += move
-    map_level[y_position][x_position] = "@"
-    print_some(map_level)
-    return map_level
+    level_map[y_position][x_position] = " "
+    return level_map
 
 
-def move_vertically(map_level, move):
-    hero_position = get_hero_position(map_level)
+def update_map_from_old_hero_position(level_map, hero_updated_position):
+    x_position = hero_updated_position[0]
+    y_position = hero_updated_position[1]
+    level_map[y_position][x_position] = "@"
+    return level_map
+
+
+def update(get_char, hero_position, move):
     x_position = hero_position[0]
     y_position = hero_position[1]
-    map_level[y_position][x_position] = " "
-
-    # update position in list
-    y_position += move
-    map_level[y_position][x_position] = "@"
-    print_some(map_level)
-    return map_level
-
-
-def get_hero_position(map_level):
-    position = [[line.index("@"), map_level.index(line)] for line in map_level if "@" in line][0]
-    print(position)
-    return position
+    if get_char in ["d", "a"]:
+        x_position += move
+    elif get_char in ["w", "s"]:
+        y_position += move
+    return [x_position, y_position]
 
 
 def print_some(level):
