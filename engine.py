@@ -10,7 +10,6 @@ MOVE_ADD = 1
 MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
 MOVE = [MOVE_ADD, MOVE_SUB]
-IMPASSABLE_ELEMENTS = ["#", "B", "R"]
 
 
 def get_char_in_terminal():
@@ -48,6 +47,8 @@ def handle_movement():
         if get_char in ["a", "d"]:
             new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
             if check_if_impassable(new_hero_coordinates, level_map):
+                character = check_if_item_interaction(new_hero_coordinates, level_map)
+                trigger_intertaction(character)
                 level_map = move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates)
                 old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
 
@@ -57,6 +58,8 @@ def handle_movement():
         elif get_char in ["s", "w"]:
             new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
             if check_if_impassable(new_hero_coordinates, level_map):
+                character = check_if_item_interaction(new_hero_coordinates, level_map)
+                trigger_intertaction(character)
                 move_vertically(level_map, old_hero_coordinates, new_hero_coordinates)
                 old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
             else:
@@ -144,12 +147,33 @@ def update_hero_coordinates(get_char, hero_position, move):
 
 
 def check_if_impassable(updated_pos, level_map):
+    IMPASSABLE_ELEMENTS = ["#", "B", "R"]
     x_position = updated_pos[0]
     y_position = updated_pos[1]
     if level_map[y_position][x_position] in IMPASSABLE_ELEMENTS:
         return False
     return True
 
+
+def check_if_item_interaction(new_hero_coordinates, level_map):
+    x_position = new_hero_coordinates[0]
+    y_position = new_hero_coordinates[1]
+    return level_map[y_position][x_position]
+
+
+def trigger_intertaction(character):
+    INTERACTION_ELEMENTS = ["W", "F", "C", "&", "D"]
+    if character in INTERACTION_ELEMENTS:
+        if character == "W":
+            pass
+        elif character == "F":
+            pass
+        elif character == "C":
+            pass
+        elif character == "&":
+            pass
+        elif character == "D":
+            pass
 
 # x = get_char_in_terminal()
 # print(x)
