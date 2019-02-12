@@ -10,6 +10,7 @@ MOVE_ADD = 1
 MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
 MOVE = [MOVE_ADD, MOVE_SUB]
+IMPASSABLE_ELEMENTS = ["#", "B", "R"]
 
 
 def get_char_in_terminal():
@@ -36,27 +37,33 @@ def handle_movement():
     keys: "w", "a", "s", "d".
     """
     level_map = data_manager.get_maps_from_file(filename)
-    hero_coordinates = HERO_BEGIN_POSITION
-    level_map[hero_coordinates[1]][hero_coordinates[0]] = "@"
+    old_hero_coordinates = HERO_BEGIN_POSITION
+    level_map[old_hero_coordinates[1]][old_hero_coordinates[0]] = "@"
     ui.display_level_map(level_map)
     get_char = ""
     while get_char != "q":
         get_char = get_char_in_terminal()
         os.system('clear')
 
-        if get_char == "d":
-            level_map = move_horizontally(get_char, level_map, MOVE, hero_coordinates)
-        elif get_char == "a":
-            level_map = move_horizontally(get_char, level_map, MOVE, hero_coordinates)
-        elif get_char == "w":
-            move_vertically(get_char, level_map, MOVE, hero_coordinates)
-        elif get_char == "s":
-            move_vertically(get_char, level_map, MOVE, hero_coordinates)
+        if get_char in ["a", "d"]:
+            new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
+            if check_if_impassable(new_hero_coordinates, level_map):
+                level_map = move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates)
+                old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
 
-        hero_coordinates = update_hero_coordinates(get_char, hero_coordinates, MOVE)
+            else:
+                ui.display_level_map(level_map)
+
+        elif get_char in ["s", "w"]:
+            new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
+            if check_if_impassable(new_hero_coordinates, level_map):
+                move_vertically(level_map, old_hero_coordinates, new_hero_coordinates)
+                old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
+            else:
+                ui.display_level_map(level_map)
 
 
-def move_horizontally(get_char, level_map, move, hero_position):
+def move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates):
     """
     Update hero position in horizontal directions.
     :param get_char: char: key pressed by user (necessary here: "a", "d")
@@ -65,15 +72,13 @@ def move_horizontally(get_char, level_map, move, hero_position):
     :param hero_position: list: actual hero position on map
     :return: list of lists: updated map level with hero position
     """
-    erase_hero = erase_old_hero_position(level_map, hero_position)
-    updated_pos = update_hero_coordinates(get_char, hero_position, move)
-    updated_level_map = place_new_hero_position(erase_hero, updated_pos)
-
+    erase_hero = erase_old_hero_position(level_map, old_hero_coordinates)
+    updated_level_map = place_new_hero_position(erase_hero, new_hero_coordinates)
     ui.display_level_map(updated_level_map)
     return updated_level_map
 
 
-def move_vertically(get_char, level_map, move, hero_position):
+def move_vertically(level_map, old_hero_coordinates, new_hero_coordinates):
     """
     Update hero position in vertical directions.
     :param get_char: char: key pressed by user (necessary here: "w", "s")
@@ -82,10 +87,8 @@ def move_vertically(get_char, level_map, move, hero_position):
     :param hero_position: list: actual hero position on map
     :return: list of lists: updated map level with hero position
     """
-    erase_hero = erase_old_hero_position(level_map, hero_position)
-    updated_pos = update_hero_coordinates(get_char, hero_position, move)
-    updated_level_map = place_new_hero_position(erase_hero, updated_pos)
-
+    erase_hero = erase_old_hero_position(level_map, old_hero_coordinates)
+    updated_level_map = place_new_hero_position(erase_hero, new_hero_coordinates)
     ui.display_level_map(updated_level_map)
     return updated_level_map
 
@@ -139,6 +142,13 @@ def update_hero_coordinates(get_char, hero_position, move):
         y_position += move_add
     return [x_position, y_position]
 
+
+def check_if_impassable(updated_pos, level_map):
+    x_position = updated_pos[0]
+    y_position = updated_pos[1]
+    if level_map[y_position][x_position] in IMPASSABLE_ELEMENTS:
+        return False
+    return True
 
 
 # x = get_char_in_terminal()

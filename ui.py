@@ -43,4 +43,5 @@ def display_level_map(level_map):
     """
     # need to be change to "".join..? Patryk
     for line in level_map:
-        print(line)
+        print("".join(line))
+
