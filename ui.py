@@ -36,12 +36,17 @@ def print_character_statistics(char_stats):
     print(string.format(*char_stats.values()))
 
 
-def display_level_map(level_map):
+def display_map_instructions():
+    print("Press W A S D to move | #-wall, B-bush, R-river, @-hero, &-enemy, F-food, D-next level, W-weapon, C-clothes")
+
+
+def display_level_map(level_map, char_stats):
     """
     Display map to user
     :param level_map: list of lists: map from text file or updated when program is running
     """
     # need to be change to "".join..? Patryk
+    print_character_statistics(char_stats)
     for line in level_map:
         print("".join(line))
-
+    display_map_instructions()

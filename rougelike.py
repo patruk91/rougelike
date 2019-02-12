@@ -11,7 +11,7 @@ filename = 'levels/level1.txt'
 def menu():
     os.system('clear')
     while True:
-        data_manager.load_asci_art("asci_art/menu_art.txt")
+        print(data_manager.load_asci_art("asci_art/menu_art.txt"))
         answer = ui.menu_option()
         if common.validate_string_input(answer, condition=["1", "2", "3", "4"]):
             if answer == "1":

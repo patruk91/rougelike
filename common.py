@@ -28,3 +28,14 @@ def validate_string_input(string, condition=""):
                 is_string_correct = False
 
     return is_string_correct
+
+
+def check_is_number(user_data, end_range):
+    """
+    Check if user provided a number for duration and start time
+    :param user_data: parameter provided by user
+    :return: boolean
+    """
+    if user_data.isdigit() and end_range > int(user_data) > 1:
+        return True
+    return False

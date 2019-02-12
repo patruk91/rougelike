@@ -3,6 +3,7 @@ import os
 
 import data_manager
 import ui
+import hot_cold
 
 
 MOVE_ADD = 1
@@ -41,7 +42,7 @@ def handle_movement(filename, char_stats):
     level_map[old_hero_coordinates[1]][old_hero_coordinates[0]] = "@"
     # place hero on map by coordinates
 
-    ui.display_level_map(level_map)
+    ui.display_level_map(level_map, char_stats)
     get_char = ""
 
     while get_char != "q":
@@ -53,9 +54,9 @@ def handle_movement(filename, char_stats):
                 trigger_interaction(new_hero_coordinates, level_map, char_stats)
             updated_level_map = update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates)
             old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
-            ui.display_level_map(updated_level_map)
+            ui.display_level_map(updated_level_map, char_stats)
         else:
-            ui.display_level_map(level_map)
+            ui.display_level_map(level_map, char_stats)
 
 
 def update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates):
@@ -172,10 +173,12 @@ def trigger_interaction(new_hero_coordinates, level_map, char_stats):
     elif character == "C":
         pass
     elif character == "&":
-        pass
+        char_stats = hot_cold.fight(char_stats, 10)
+        if char_stats["HP"] <= 0:
+            end_screen = data_manager.load_asci_art("asci_art/game_over.txt")
     elif character == "D":
         pass
 
 # x = get_char_in_terminal()
 # print(x)
-print(handle_movement(filename = 'levels/level1.txt'))
+# print(handle_movement(filename = 'levels/level1.txt'))
