@@ -34,3 +34,13 @@ def menu_option():
 def print_character_statistics(char_stats):
     string = "HP:{:>5}\tDEF:{:>5}\tATC:{:>5}\tEXP:{:>5}\tLVL:{:>5}"
     print(string.format(*char_stats.values()))
+
+
+def display_level_map(level_map):
+    """
+    Display map to user
+    :param level_map: list of lists: map from text file or updated when program is running
+    """
+    # need to be change to "".join..? Patryk
+    for line in level_map:
+        print(line)
