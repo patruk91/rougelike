@@ -5,7 +5,7 @@ import data_manager
 import ui
 
 
-filename = "levels/Level1.txt"
+filename = "levels/level1.txt"
 MOVE_ADD = 1
 MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
@@ -172,4 +172,4 @@ def trigger_interaction(character):
 
 # x = get_char_in_terminal()
 # print(x)
-print(handle_movement())
+# print(handle_movement())
