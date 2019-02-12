@@ -177,4 +177,4 @@ def trigger_intertaction(character):
 
 # x = get_char_in_terminal()
 # print(x)
-print(handle_movement())
+# print(handle_movement())
