@@ -7,10 +7,8 @@ import hot_cold
 # import character_creation.character_creation as char_cr
 
 
-MOVE_ADD = 1
-MOVE_SUB = -1
 HERO_BEGIN_POSITION = [1, 20]
-MOVE = [MOVE_ADD, MOVE_SUB]
+MOVE = {"FORWARD": 1, "BACKWARD": -1}
 IMPASSABLE_ELEMENTS = ["#", "B", "R"]
 INTERACTION_ELEMENTS = ["W", "F", "C", "&", "D"]
 
@@ -122,22 +120,22 @@ def update_hero_coordinates(get_char, old_hero_coordinates, move):
     Update hero coordinates/position
     :param get_char: char: key pressed by user
     :param old_hero_coordinates: list: hero position to update, depend on get_char
-    :param move: list: constant, hero can move forward or backward (depend on key pressed)
+    :param move: dict: constant, hero can move forward or backward (depend on key pressed)
     :return: list: updated hero coordinates
     """
     x_position = old_hero_coordinates[0]
     y_position = old_hero_coordinates[1]
-    move_add = move[0]
-    move_sub = move[1]
+    move_forward = move.get("FORWARD", 0)
+    move_backward = move.get("BACKWARD", 0)
 
     if get_char == "d":
-        x_position += move_add
+        x_position += move_forward
     elif get_char == "a":
-        x_position += move_sub
+        x_position += move_backward
     elif get_char == "w":
-        y_position += move_sub
+        y_position += move_backward
     elif get_char == "s":
-        y_position += move_add
+        y_position += move_forward
     return [x_position, y_position]
 
 
@@ -193,6 +191,7 @@ def trigger_interaction(new_hero_coordinates, level_map, char_stats):
     elif character == "D":
         pass
 
+
 # x = get_char_in_terminal()
 # print(x)
-# print(handle_movement(filename = 'levels/level1.txt', char_stats=char_cr.create_character(5)))
+# print(handle_movement(filename='levels/level1.txt', char_stats=char_cr.create_character(5)))
