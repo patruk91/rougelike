@@ -1,0 +1,22 @@
+########################################################################################
+#  W            BBBBBBB                  BBBBBBBBBBBBBBBBBBBB                         F#
+#                                          BBBBBBBBBBBBB                               #
+#                                     &      BBBBBBBBBBBBBBBBBB             ######  ####
+#RRRR                                                                       #  &       #
+#  RRRR  RRRRRRRR                BBBBBBBBBBBBBBBBBB                         #  #########
+#   RRRRRRRRRRRRRRRR    RRRRRRR          BBBBBBBBBBBBB                      #          #
+#     RRRR     RRRRRRRRRRRRRRRRRRRRRRRR                             BBBBB   ######     #
+#                  RRRRRRRRRRRR     RRRRRRRR                      BBBB      #       ####
+#                                     RRRRRRRR                   BBBB       #       # D#
+#                                           RRRR                            #       #  #
+#                          &                  RRRR                          #       #  #
+#             BB                                 &                          # & ##### &#
+#              BB              BB                RRRR                       #    #     #
+#                             BBBB             RRRR           BBBB          #        F #
+#                                             RRRR                          ############
+#       BBBB         #                          RRRR              BB                   #
+#        BB          #                            RRRR             BB                  #
+#                    #                    BBBB     RRRR                                #
+#                    #                   BBBB         RRRR                             #
+#                    #                     BB     C    RRRR                          F #
+########################################################################################
