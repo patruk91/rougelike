@@ -1,4 +1,5 @@
 import ui
+import data_manager
 
 
 def validate_string_input(string, condition=""):
@@ -39,3 +40,8 @@ def check_is_number(user_data, end_range):
     if user_data.isdigit() and end_range >= int(user_data) >= 1:
         return True
     return False
+
+
+def handle_transfer_to_next_map(map_number):
+    level_map = data_manager.get_maps_from_file(map_number)
+    return level_map

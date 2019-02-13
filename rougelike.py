@@ -10,6 +10,7 @@ filename = 'levels/level1.txt'
 
 
 def menu():
+    MAP_ITERATOR = 0
     os.system('clear')
     while True:
         print(data_manager.load_asci_art("asci_art/menu_art.txt"))
@@ -19,7 +20,7 @@ def menu():
                 char_stats = char_cr.create_character(5, {}, True)
                 os.system('clear')
                 data_manager.get_maps_from_file(filename)
-                engine.handle_movement(filename, char_stats)
+                engine.handle_movement(filename, char_stats, MAP_ITERATOR)
             elif answer == "2":
                 pass
             elif answer == "3":
