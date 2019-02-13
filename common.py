@@ -45,3 +45,26 @@ def check_is_number(user_data, end_range):
 def handle_transfer_to_next_map(map_number):
     level_map = data_manager.get_maps_from_file(map_number)
     return level_map
+
+
+def check_if_item_interaction(new_hero_coordinates, level_map):
+    """
+    Check if hero encountered elements with interactions: ("W", "F", "C", "&", "D")
+    :param new_hero_coordinates: list: hero coordinates on map, where he want to move
+    :param level_map: list of lists: designed map from text file
+    :return: boolean: True if he encountered elements
+    """
+    result = False
+    INTERACTION_ELEMENTS = ["W", "F", "C", "&", "D"]
+    x_position = new_hero_coordinates[0]
+    y_position = new_hero_coordinates[1]
+    if level_map[y_position][x_position] in INTERACTION_ELEMENTS:
+        result = True
+    return result
+
+
+def get_character_at_position(level_map, new_hero_coordinates):
+    x_position = new_hero_coordinates[0]
+    y_position = new_hero_coordinates[1]
+    character = level_map[y_position][x_position]
+    return character
