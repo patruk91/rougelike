@@ -4,14 +4,17 @@ import os
 import data_manager
 import ui
 import hot_cold
+import common
 # import character_creation.character_creation as char_cr
 
 
-HERO_BEGIN_POSITION = [1, 20]
+
 MOVE = {"FORWARD": 1, "BACKWARD": -1}
 IMPASSABLE_ELEMENTS = ["#", "B", "R"]
 INTERACTION_ELEMENTS = ["W", "F", "C", "&", "D"]
-
+HERO_BEGIN_POSITION = [[1, 20], [1, 13], [2, 19], [2, 17]]
+HERO_END_POSITION = [[2, 20], [2, 13], [1, 19], [1, 17]]
+LEVELS_NAME = ['levels/level1.txt', 'levels/level2.txt', 'levels/level3.txt', 'levels/level4.txt']
 
 def get_char_in_terminal():
     """
@@ -31,7 +34,7 @@ def get_char_in_terminal():
     return char
 
 
-def handle_movement(filename, char_stats):
+def handle_movement(filename, char_stats, MAP_ITERATOR):
     """
     Main function to handle hero movement. Hero can move by pressing
     keys: "w", "a", "s", "d".
@@ -39,7 +42,7 @@ def handle_movement(filename, char_stats):
     :param char_stats: dict: basic hero statistic
     """
     level_map = data_manager.get_maps_from_file(filename)
-    old_hero_coordinates = HERO_BEGIN_POSITION
+    old_hero_coordinates = HERO_BEGIN_POSITION[0]
     level_map[old_hero_coordinates[1]][old_hero_coordinates[0]] = "@"
     # place hero on map by coordinates
 
@@ -52,7 +55,31 @@ def handle_movement(filename, char_stats):
         new_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
         if check_if_impassable(new_hero_coordinates, level_map):
             if check_if_item_interaction(new_hero_coordinates, level_map):
-                trigger_interaction(new_hero_coordinates, level_map, char_stats)
+                character = get_character_at_position(level_map, new_hero_coordinates)
+
+                damage = 5
+                if character == "W":
+                    pass
+                elif character == "F":
+                    pass
+                elif character == "C":
+                    pass
+                elif character == "&":
+                    char_stats = hot_cold.fight(char_stats, damage)
+                    if char_stats["HP"] <= 0:
+                        end_screen = data_manager.load_asci_art("asci_art/game_over.txt")
+                        print(end_screen)
+                elif character == "D":
+                    MAP_ITERATOR += 1
+                    level_map = common.handle_transfer_to_next_map(LEVELS_NAME[MAP_ITERATOR])
+
+
+                    new_hero_coordinates = HERO_BEGIN_POSITION[MAP_ITERATOR]
+                    old_hero_coordinates = HERO_END_POSITION[MAP_ITERATOR]
+
+
+
+                # trigger_interaction(char_stats, character)
             updated_level_map = update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates)
             old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
             ui.display_level_map(updated_level_map, char_stats)
@@ -166,33 +193,37 @@ def check_if_item_interaction(new_hero_coordinates, level_map):
         return True
     return False
 
+#
+# def trigger_interaction(char_stats, character):
+#     """
+#     Trigger other functions due to a reaction with a given element on level map
+#     :param new_hero_coordinates: list: hero coordinates on map
+#     :param level_map: designed map from text file
+#     :param char_stats: dict: basic hero statistic
+#     :return:
+#     """
+#     damage = 5
+#
+#     if character == "W":
+#         pass
+#     elif character == "F":
+#         pass
+#     elif character == "C":
+#         pass
+#     elif character == "&":
+#         char_stats = hot_cold.fight(char_stats, damage)
+#         if char_stats["HP"] <= 0:
+#             end_screen = data_manager.load_asci_art("asci_art/game_over.txt")
+#             print(end_screen)
+#     elif character == "D":
+#         pass
 
-def trigger_interaction(new_hero_coordinates, level_map, char_stats):
-    """
-    Trigger other functions due to a reaction with a given element on level map
-    :param new_hero_coordinates: list: hero coordinates on map
-    :param level_map: designed map from text file
-    :param char_stats: dict: basic hero statistic
-    :return:
-    """
-    damage = 5
+
+def get_character_at_position(level_map, new_hero_coordinates):
     x_position = new_hero_coordinates[0]
     y_position = new_hero_coordinates[1]
     character = level_map[y_position][x_position]
-    if character == "W":
-        pass
-    elif character == "F":
-        pass
-    elif character == "C":
-        pass
-    elif character == "&":
-        char_stats = hot_cold.fight(char_stats, damage)
-        if char_stats["HP"] <= 0:
-            end_screen = data_manager.load_asci_art("asci_art/game_over.txt")
-            print(end_screen)
-    elif character == "D":
-        pass
-
+    return character
 
 # x = get_char_in_terminal()
 # print(x)
