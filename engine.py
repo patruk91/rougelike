@@ -5,6 +5,8 @@ import data_manager
 import ui
 import hot_cold
 import common
+import items.items
+import inventory.inventory
 # import character_creation.character_creation as char_cr
 
 
@@ -59,11 +61,17 @@ def handle_movement(filename, char_stats, MAP_ITERATOR):
 
                 damage = 5
                 if character == "W":
-                    pass
+                    loot = items.items.weapons()
+                    char_stats["ATC"] += loot[1]  
                 elif character == "F":
-                    pass
+                    loot = items.items.food()
+                    if char_stats["HP"] < 100:
+                        char_stats["HP"] += loot[1]
+                    if char_stats["HP"] > 100:
+                        char_stats["HP"] = 100
                 elif character == "C":
-                    pass
+                    loot = items.items.clotches()
+                    char_stats["DEF"] += loot[1]
                 elif character == "&":
                     char_stats = hot_cold.fight(char_stats, damage)
                     if char_stats["HP"] <= 0:
