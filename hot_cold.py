@@ -3,6 +3,7 @@ import random
 import data_manager
 import ui
 import common
+import character_creation
 
 
 def get_random_int(range_start, range_end):
@@ -30,6 +31,12 @@ def check_guess(char_stats, number, numbers_end_range, damage):
                 char_stats["HP"] -= (damage - char_stats["DEF"])
     if char_stats["HP"] > 0:
         print("You defeted enemy!")
+        char_stats["EXP"] += 2
+        if char_stats["EXP"] == 10:
+            char_stats["EXP"] = 0
+            char_stats["LVL"] += 1
+            char_stats = char_stats.create_character(2)
+
     return char_stats
 
 

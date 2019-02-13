@@ -17,7 +17,7 @@ def create_character(points):
             statistics["DEF"] += 1
         elif stat_to_add in ["A", "a"]:
             statistics["ATC"] += 1
-        ui.show_character_creation_screen(statistics, points)
         points -= 1
+        ui.show_character_creation_screen(statistics, points)
 
     return statistics

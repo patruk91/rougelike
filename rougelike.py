@@ -18,7 +18,6 @@ def menu():
                 char_stats = char_cr.create_character(5)
                 os.system('clear')
                 data_manager.get_maps_from_file(filename)
-                ui.print_character_statistics(char_stats)
                 engine.handle_movement(filename, char_stats)
             elif answer == "2":
                 pass
