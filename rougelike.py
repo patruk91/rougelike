@@ -6,6 +6,8 @@ import os
 import engine
 import interaction
 import hot_cold
+import items.items
+
 
 
 
@@ -30,7 +32,7 @@ def menu():
                 hero_coordinates = HERO_BEGIN_POSITION[map_iterator]
                 level_map = data_manager.get_maps_from_file(LEVELS_NAME[map_iterator])
                 level_map = engine.place_new_hero_position(level_map, hero_coordinates)
-                ui.display_level_map(level_map)
+                ui.display_level_map(level_map, char_stats, inv)
                 game_won = True
                 while get_char != "q" and game_won:
                     get_char = engine.get_char_in_terminal()
@@ -38,7 +40,7 @@ def menu():
                     new_hero_coordinates = engine.handle_coordinates(get_char, hero_coordinates, LEVELS_NAME[map_iterator])
                     if common.check_if_item_interaction(new_hero_coordinates, level_map):
                         character = common.get_character_at_position(level_map, new_hero_coordinates)
-                        map_iterator = interaction.handle_interaction(character, map_iterator)
+                        map_iterator = interaction.handle_interaction(character, map_iterator, items, char_stats, inv)
 
                         if character == "D":
                             if map_iterator < 4:
@@ -59,11 +61,11 @@ def menu():
 
                         if game_won != False:
                             level_map = engine.update_map(get_char, level_map, new_hero_coordinates, hero_coordinates)
-                            ui.display_level_map(level_map)
+                            ui.display_level_map(level_map, char_stats, inv)
 
                     else:
                         level_map = engine.update_map(get_char, level_map, hero_coordinates, new_hero_coordinates)
-                        ui.display_level_map(level_map)
+                        ui.display_level_map(level_map, char_stats, inv)
                         hero_coordinates = new_hero_coordinates
 
             elif answer == "2":

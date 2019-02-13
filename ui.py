@@ -48,16 +48,18 @@ def display_inventory(inventory):
     print("Total numbers of items: ", sum(inventory.values()))
 
 
-def display_level_map(level_map):
+def display_level_map(level_map, char_stats, inv):
     """
     Display map to user
     :param level_map: list of lists: map from text file or updated when program is running
     """
     # need to be change to "".join..? Patryk
-    # print_character_statistics(char_stats)
+    print_character_statistics(char_stats)
 
     for line in level_map:
         print("".join(line))
 
-    # display_map_instructions()
-    # display_inventory(inv)
+    display_map_instructions()
+    display_inventory(inv)
+
+
