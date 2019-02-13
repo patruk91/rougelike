@@ -41,11 +41,14 @@ def display_map_instructions():
 
 
 def display_inventory(inventory):
-
+    list_of_items = []
+    for keys in inventory.keys():
+        list_of_items.append(keys)
     print("Inventory:")
-    for keys, values in inventory.items():
-        print(str(keys) + ' ' + str(values))
-    print("Total numbers of items: ", sum(inventory.values()))
+    string = "{},\t" * len(list_of_items)
+    print(string.format(*list_of_items))
+
+        
 
 
 def display_level_map(level_map, char_stats, inv):
