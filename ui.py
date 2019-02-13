@@ -58,7 +58,11 @@ def display_level_map(level_map, char_stats, inv):
     """
     # need to be change to "".join..? Patryk
     print_character_statistics(char_stats)
+
     for line in level_map:
         print("".join(line))
+
     display_map_instructions()
     display_inventory(inv)
+
+

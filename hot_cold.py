@@ -31,6 +31,7 @@ def check_guess(char_stats, number, numbers_end_range, damage):
                 print("guess is high")
                 if (damage - char_stats["DEF"]) >= 0:
                     char_stats["HP"] -= (damage - char_stats["DEF"])
+    os.system('clear')
     if char_stats["HP"] > 0:
         char_stats["EXP"] += 2
         if char_stats["EXP"] == 10:
