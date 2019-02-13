@@ -25,10 +25,12 @@ def check_guess(char_stats, number, numbers_end_range, damage):
             os.system('clear')
             if guess < number:
                 print("guess is low")
-                char_stats["HP"] -= (damage - char_stats["DEF"])
+                if (damage - char_stats["DEF"]) >= 0:
+                    char_stats["HP"] -= (damage - char_stats["DEF"])
             elif guess > number:
                 print("guess is high")
-                char_stats["HP"] -= (damage - char_stats["DEF"])
+                if (damage - char_stats["DEF"]) >= 0:
+                    char_stats["HP"] -= (damage - char_stats["DEF"])
     if char_stats["HP"] > 0:
         char_stats["EXP"] += 2
         if char_stats["EXP"] == 10:
@@ -41,7 +43,7 @@ def check_guess(char_stats, number, numbers_end_range, damage):
 
 
 def fight(char_stats, damage):
-    end_range = 99 - char_stats["ATC"] * 4
+    end_range = 99 - char_stats["ATC"] * 2
     random_int = get_random_int(1, end_range)
     char_stats = check_guess(char_stats, random_int, end_range, damage)
 
