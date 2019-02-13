@@ -4,6 +4,7 @@ import os
 import data_manager
 import ui
 import hot_cold
+import character_creation.character_creation as char_cr
 
 
 MOVE_ADD = 1
@@ -36,6 +37,8 @@ def handle_movement(filename, char_stats):
     """
     Main function to handle hero movement. Hero can move by pressing
     keys: "w", "a", "s", "d".
+    :param filename: text file: where stored level
+    :param char_stats: dict: basic hero statistic
     """
     level_map = data_manager.get_maps_from_file(filename)
     old_hero_coordinates = HERO_BEGIN_POSITION
@@ -66,16 +69,16 @@ def update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates):
     elif get_char in ["s", "w"]:
         updated_level_map = move_vertically(level_map, old_hero_coordinates, new_hero_coordinates)
         return updated_level_map
+    return level_map
 
 
 def move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates):
     """
-    Update hero position in horizontal directions.
-    :param get_char: char: key pressed by user (necessary here: "a", "d")
-    :param level_map: list of lists: map from text file
-    :param move: list: constant, hero can move forward or backward (depend on character)
-    :param hero_position: list: actual hero position on map
-    :return: list of lists: updated map level with hero position
+    Move hero on map in horizontal directions
+    :param level_map: list of lists: designed map from text file
+    :param old_hero_coordinates: list: old(previous) hero coordinates on map
+    :param new_hero_coordinates: list: actual hero coordinates on map
+    :return: list of lists: updated level_map with placed hero at new coordinates
     """
     erase_hero = erase_old_hero_position(level_map, old_hero_coordinates)
     updated_level_map = place_new_hero_position(erase_hero, new_hero_coordinates)
@@ -84,37 +87,36 @@ def move_horizontally(level_map, old_hero_coordinates, new_hero_coordinates):
 
 def move_vertically(level_map, old_hero_coordinates, new_hero_coordinates):
     """
-    Update hero position in vertical directions.
-    :param get_char: char: key pressed by user (necessary here: "w", "s")
-    :param level_map: list of lists: map from text file
-    :param move: list: constant, hero can move forward or backward (depend on character)
-    :param hero_position: list: actual hero position on map
-    :return: list of lists: updated map level with hero position
+   Move hero on map in vertical directions
+   :param level_map: list of lists: designed map from text file
+   :param old_hero_coordinates: list: old(previous) hero coordinates on map
+   :param new_hero_coordinates: list: actual hero coordinates on map
+   :return: list of lists: updated level_map with placed hero at new coordinates
     """
     erase_hero = erase_old_hero_position(level_map, old_hero_coordinates)
     updated_level_map = place_new_hero_position(erase_hero, new_hero_coordinates)
     return updated_level_map
 
 
-def erase_old_hero_position(level_map, hero_position):
+def erase_old_hero_position(level_map, old_hero_coordinates):
     """
-    Erase hero position from map
-    :param level_map: list of lists: map from text file
-    :param hero_position: list: actual hero position on map to erase from level_map
-    :return: list of lists: updated level_map without hero position
+    Erase form map: old hero position
+    :param level_map: list of lists: designed map from text file
+    :param old_hero_coordinates: list: old(previous) hero coordinates on map
+    :return: list of lists: updated level_map without old hero coordinates
     """
-    x_position = hero_position[0]
-    y_position = hero_position[1]
+    x_position = old_hero_coordinates[0]
+    y_position = old_hero_coordinates[1]
     level_map[y_position][x_position] = " "
     return level_map
 
 
 def place_new_hero_position(level_map, hero_updated_position):
     """
-    Place on map new hero position
-    :param level_map: list of lists: map from text file
-    :param hero_updated_position: list: actual hero position on map to place on level_map
-    :return: list of lists: updated level_map with new hero position
+    Place on map: new hero position
+    :param level_map: list of lists: designed map from text file
+    :param hero_updated_position: list: actual hero coordinates on map
+    :return: list of lists: updated level_map with new hero coordinates
     """
     x_position = hero_updated_position[0]
     y_position = hero_updated_position[1]
@@ -124,10 +126,10 @@ def place_new_hero_position(level_map, hero_updated_position):
 
 def update_hero_coordinates(get_char, hero_position, move):
     """
-    Update hero coordinates
-    :param get_char: char: key pressed by user (necessary here: "w", "s")
+    Update hero coordinates/position
+    :param get_char: char: key pressed by user
     :param hero_position: list: hero position to update, depend on get_char
-    :param move: list: constant, hero can move forward or backward (depend on character)
+    :param move: list: constant, hero can move forward or backward (depend on key pressed)
     :return: list: updated hero coordinates
     """
     x_position = hero_position[0]
@@ -146,15 +148,27 @@ def update_hero_coordinates(get_char, hero_position, move):
     return [x_position, y_position]
 
 
-def check_if_impassable(updated_pos, level_map):
-    x_position = updated_pos[0]
-    y_position = updated_pos[1]
+def check_if_impassable(new_hero_coordinates, level_map):
+    """
+    Check if hero encountered impassable elements: ("#", "B", "R")
+    :param new_hero_coordinates: list: hero coordinates on map, where he want to move
+    :param level_map: list of lists: designed map from text file
+    :return: boolean: False if he encountered elements
+    """
+    x_position = new_hero_coordinates[0]
+    y_position = new_hero_coordinates[1]
     if level_map[y_position][x_position] in IMPASSABLE_ELEMENTS:
         return False
     return True
 
 
 def check_if_item_interaction(new_hero_coordinates, level_map):
+    """
+    Check if hero encountered elements with interactions: ("W", "F", "C", "&", "D")
+    :param new_hero_coordinates: list: hero coordinates on map, where he want to move
+    :param level_map: list of lists: designed map from text file
+    :return: boolean: True if he encountered elements
+    """
     x_position = new_hero_coordinates[0]
     y_position = new_hero_coordinates[1]
     if level_map[y_position][x_position] in INTERACTION_ELEMENTS:
@@ -163,6 +177,13 @@ def check_if_item_interaction(new_hero_coordinates, level_map):
 
 
 def trigger_interaction(new_hero_coordinates, level_map, char_stats):
+    """
+    Trigger other functions due to a reaction with a given element
+    :param new_hero_coordinates: list: hero coordinates on map
+    :param level_map: designed map from text file
+    :param char_stats: dict: basic hero statistic
+    :return:
+    """
     x_position = new_hero_coordinates[0]
     y_position = new_hero_coordinates[1]
     character = level_map[y_position][x_position]
@@ -181,4 +202,4 @@ def trigger_interaction(new_hero_coordinates, level_map, char_stats):
 
 # x = get_char_in_terminal()
 # print(x)
-# print(handle_movement(filename = 'levels/level1.txt'))
+print(handle_movement(filename = 'levels/level1.txt', char_stats=char_cr.create_character(5)))
