@@ -40,7 +40,15 @@ def display_map_instructions():
     print("Press W A S D to move | #-wall, B-bush, R-river, @-hero, &-enemy, F-food, D-next level, W-weapon, C-clothes")
 
 
-def display_level_map(level_map, char_stats):
+def display_inventory(inventory):
+
+    print("Inventory:")
+    for keys, values in inventory.items():
+        print(str(keys) + ' ' + str(values))
+    print("Total numbers of items: ", sum(inventory.values()))
+
+
+def display_level_map(level_map, char_stats, inv):
     """
     Display map to user
     :param level_map: list of lists: map from text file or updated when program is running
@@ -50,3 +58,4 @@ def display_level_map(level_map, char_stats):
     for line in level_map:
         print("".join(line))
     display_map_instructions()
+    display_inventory(inv)

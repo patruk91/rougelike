@@ -18,10 +18,10 @@ def menu():
         if common.validate_string_input(answer, condition=["1", "2", "3", "4"]):
             if answer == "1":
                 char_stats = char_cr.create_character(5, {}, True)
-                inventory = {"stick": 1}
+                inv = {}
                 os.system('clear')
                 data_manager.get_maps_from_file(filename)
-                engine.handle_movement(filename, char_stats, MAP_ITERATOR)
+                engine.handle_movement(filename, char_stats, MAP_ITERATOR,inv)
             elif answer == "2":
                 pass
             elif answer == "3":

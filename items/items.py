@@ -2,8 +2,8 @@ import random
 
 
 def weapons():
-    weapons_list = [("dagger", 2), ("axe", 3), ("pick", 3), ("stick", 1),
-                    ("infinity edge", 15), ("bloodrazor", 10)]
+    weapons_list = [("dagger", 3), ("axe", 5), ("pick", 4), ("stick", 1),
+                    ("infinity edge", 10), ("bloodrazor", 8)]
     return weapons_list[random.randint(0, len(weapons_list)-1)]
 
 
@@ -14,8 +14,7 @@ def food():
 
 
 def clotches():
-    clothes_list = [("brass helmet", 3), ("rainbow shield", 15),
+    clothes_list = [("brass helmet", 3), ("rainbow shield", 10),
                     ("doran shield", 2), ("plate armor", 5),
                     ("steel boots", 4), ("golden legs", 8)]
     return clothes_list[random.randint(0, len(clothes_list)-1)]
-

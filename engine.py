@@ -18,6 +18,7 @@ HERO_BEGIN_POSITION = [[1, 20], [1, 13], [2, 19], [2, 17]]
 HERO_END_POSITION = [[2, 20], [2, 13], [1, 19], [1, 17]]
 LEVELS_NAME = ['levels/level1.txt', 'levels/level2.txt', 'levels/level3.txt', 'levels/level4.txt']
 
+
 def get_char_in_terminal():
     """
     Get character from user in terminal, when he push the button.
@@ -36,7 +37,7 @@ def get_char_in_terminal():
     return char
 
 
-def handle_movement(filename, char_stats, MAP_ITERATOR):
+def handle_movement(filename, char_stats, MAP_ITERATOR, inv):
     """
     Main function to handle hero movement. Hero can move by pressing
     keys: "w", "a", "s", "d".
@@ -48,7 +49,7 @@ def handle_movement(filename, char_stats, MAP_ITERATOR):
     level_map[old_hero_coordinates[1]][old_hero_coordinates[0]] = "@"
     # place hero on map by coordinates
 
-    ui.display_level_map(level_map, char_stats)
+    ui.display_level_map(level_map, char_stats, inv)
     get_char = ""
 
     while get_char != "q":
@@ -62,7 +63,9 @@ def handle_movement(filename, char_stats, MAP_ITERATOR):
                 damage = 10
                 if character == "W":
                     loot = items.items.weapons()
-                    char_stats["ATC"] += loot[1]  
+                    char_stats["ATC"] += loot[1]
+                    inventory.inventory.add_to_inventory(inv, loot)
+                    del inv[loot[1]]     
                 elif character == "F":
                     loot = items.items.food()
                     if char_stats["HP"] < 100:
@@ -90,9 +93,9 @@ def handle_movement(filename, char_stats, MAP_ITERATOR):
                 # trigger_interaction(char_stats, character)
             updated_level_map = update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates)
             old_hero_coordinates = update_hero_coordinates(get_char, old_hero_coordinates, MOVE)
-            ui.display_level_map(updated_level_map, char_stats)
+            ui.display_level_map(updated_level_map, char_stats, inv)
         else:
-            ui.display_level_map(level_map, char_stats)
+            ui.display_level_map(level_map, char_stats, inv)
 
 
 def update_map(get_char, level_map, old_hero_coordinates, new_hero_coordinates):
