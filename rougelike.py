@@ -42,6 +42,9 @@ def menu():
                         character = common.get_character_at_position(level_map, new_hero_coordinates)
                         map_iterator = interaction.handle_interaction(character, map_iterator, items, char_stats, inv)
 
+                        if character == "&":
+                            if char_stats["HP"] <= 0:
+                                game_won = False
                         if character == "D":
                             if map_iterator < 4:
                                 level_map = data_manager.get_maps_from_file(LEVELS_NAME[map_iterator])
