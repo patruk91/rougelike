@@ -14,8 +14,8 @@ import inventory.inventory
 MOVE = {"FORWARD": 1, "BACKWARD": -1}
 IMPASSABLE_ELEMENTS = ["#", "B", "R"]
 INTERACTION_ELEMENTS = ["W", "F", "C", "&", "D"]
-HERO_BEGIN_POSITION = [[1, 20], [1, 13], [2, 19], [2, 17]]
-HERO_END_POSITION = [[2, 20], [2, 13], [1, 19], [1, 17]]
+HERO_BEGIN_POSITION = [[1, 20], [1, 13], [1, 19], [1, 17]]
+HERO_END_POSITION = [[2, 20], [2, 13], [2, 19], [2, 17]]
 LEVELS_NAME = ['levels/level1.txt', 'levels/level2.txt', 'levels/level3.txt', 'levels/level4.txt']
 
 def get_char_in_terminal():
@@ -84,7 +84,7 @@ def handle_movement(filename, char_stats, MAP_ITERATOR):
 
                     new_hero_coordinates = HERO_BEGIN_POSITION[MAP_ITERATOR]
                     old_hero_coordinates = HERO_END_POSITION[MAP_ITERATOR]
-
+                    get_char = "a"
 
 
                 # trigger_interaction(char_stats, character)
