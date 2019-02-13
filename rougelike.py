@@ -8,6 +8,7 @@ import engine
 
 filename = 'levels/level1.txt'
 
+
 def menu():
     os.system('clear')
     while True:
@@ -15,7 +16,7 @@ def menu():
         answer = ui.menu_option()
         if common.validate_string_input(answer, condition=["1", "2", "3", "4"]):
             if answer == "1":
-                char_stats = char_cr.create_character(5)
+                char_stats = char_cr.create_character(5, {}, True)
                 os.system('clear')
                 data_manager.get_maps_from_file(filename)
                 engine.handle_movement(filename, char_stats)

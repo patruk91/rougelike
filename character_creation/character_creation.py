@@ -2,8 +2,11 @@ import ui
 import common
 
 
-def create_character(points):
-    statistics = {"HP": 75, "DEF": 0, "ATC": 1, "EXP": 0, "LVL": 1}
+def create_character(points, chatacter_stats, creation=False):
+    if creation:
+        statistics = {"HP": 75, "DEF": 0, "ATC": 1, "EXP": 0, "LVL": 1}
+    else:
+        statistics = chatacter_stats
     ui.show_character_creation_screen(statistics, points)
 
     while points > 0:

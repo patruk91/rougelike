@@ -3,7 +3,7 @@ import random
 import data_manager
 import ui
 import common
-import character_creation
+import character_creation.character_creation as char_cr
 
 
 def get_random_int(range_start, range_end):
@@ -25,17 +25,17 @@ def check_guess(char_stats, number, numbers_end_range, damage):
             os.system('clear')
             if guess < number:
                 print("guess is low")
-                char_stats["HP"] -= damage
+                char_stats["HP"] -= (damage - char_stats["DEF"])
             elif guess > number:
                 print("guess is high")
                 char_stats["HP"] -= (damage - char_stats["DEF"])
     if char_stats["HP"] > 0:
-        print("You defeted enemy!")
         char_stats["EXP"] += 2
         if char_stats["EXP"] == 10:
             char_stats["EXP"] = 0
             char_stats["LVL"] += 1
-            char_stats = char_stats.create_character(2)
+            char_stats = char_cr.create_character(2, char_stats)
+            os.system('clear')
 
     return char_stats
 

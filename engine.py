@@ -175,6 +175,7 @@ def trigger_interaction(new_hero_coordinates, level_map, char_stats):
     :param char_stats: dict: basic hero statistic
     :return:
     """
+    damage = 5
     x_position = new_hero_coordinates[0]
     y_position = new_hero_coordinates[1]
     character = level_map[y_position][x_position]
@@ -185,9 +186,10 @@ def trigger_interaction(new_hero_coordinates, level_map, char_stats):
     elif character == "C":
         pass
     elif character == "&":
-        char_stats = hot_cold.fight(char_stats, 10)
+        char_stats = hot_cold.fight(char_stats, damage)
         if char_stats["HP"] <= 0:
             end_screen = data_manager.load_asci_art("asci_art/game_over.txt")
+            print(end_screen)
     elif character == "D":
         pass
 
