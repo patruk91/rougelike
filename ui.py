@@ -49,8 +49,6 @@ def display_inventory(inventory):
     print(string.format(*list_of_items))
 
         
-
-
 def display_level_map(level_map, char_stats, inv):
     """
     Display map to user
