@@ -59,7 +59,7 @@ def handle_movement(filename, char_stats, MAP_ITERATOR):
             if check_if_item_interaction(new_hero_coordinates, level_map):
                 character = get_character_at_position(level_map, new_hero_coordinates)
 
-                damage = 5
+                damage = 10
                 if character == "W":
                     loot = items.items.weapons()
                     char_stats["ATC"] += loot[1]  

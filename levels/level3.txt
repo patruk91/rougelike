@@ -1,8 +1,8 @@
 ########################################################################################
-#  W            BBBBBBB                  BBBBBBBBBBBBBBBBBBBB                         F#
-#                                          BBBBBBBBBBBBB                               #
-#                                     &      BBBBBBBBBBBBBBBBBB             ######  ####
-#RRRR                                                                       #          #
+#  W  B          BBBBBBB                  BBBBBBBBBBBBBBBBBBBB                        F#
+#B BBB                                     BBBBBBBBBBBBB                               #
+# &                                           BBBBBBBBBBBBBBBBBB             #####  ####
+#RRRR                                          &                            #          #
 #  RRRR  RRRRRRRR                BBBBBBBBBBBBBBBBBB                         #  #########
 #   RRRRRRRRRRRRRRRR    RRRRRRR          BBBBBBBBBBBBB                      #          #
 #     RRRR     RRRRRRRRRRRRRRRRRRRRRRRR                             BBBBB   ######     #
@@ -15,8 +15,8 @@
 #                             BBBB             RRRR           BBBB          #        F #
 #                                             RRRR                          ############
 #       BBBB         #                          RRRR              BB                   #
-#        BB          #                            RRRR             BB                  #
-#                    #                    BBBB     RRRR                                #
+#        BB          #                          & RRRR             BB                  #
+#                    #                    BBBBBB    RRRR                                #
 #####                #                   BBBB         RRRR                             #
 #                    #                     BB     C    RRRR                          F #
 ########################################################################################
