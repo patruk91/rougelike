@@ -17,6 +17,8 @@ def handle_interaction(character, map_iterator, items, char_stats, inv):
     elif character == "C":
         loot = items.items.clotches()
         char_stats["DEF"] += loot[1]
+        inventory.inventory.add_to_inventory(inv, loot)
+        del inv[loot[1]]
     elif character == "&":
         damage = 10
         char_stats = hot_cold.fight(char_stats, damage)
