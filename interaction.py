@@ -21,7 +21,7 @@ def handle_interaction(character, map_iterator, items, char_stats, inv):
         damage = 10
         char_stats = hot_cold.fight(char_stats, damage)
         if char_stats["HP"] <= 0:
-            end_screen = data_manager.load_ascii_ar("ascii_ar/game_over.txt")
+            end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
             print(end_screen)
     elif character == "D":
         map_iterator += 1

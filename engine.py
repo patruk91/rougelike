@@ -40,12 +40,12 @@ def engine_work(char_stats, inv, map_iterator):
                     damage = 15
                     char_stats = hot_cold.fight(char_stats, damage)
                     if char_stats["HP"] > 0:
-                        end_screen = data_manager.load_ascii_ar("ascii_ar/win.txt")
+                        end_screen = data_manager.load_ascii_art("ascii_art/win.txt")
                         print(end_screen)
                         game_won = False
 
                     else:
-                        end_screen = data_manager.load_ascii_ar("ascii_ar/game_over.txt")
+                        end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
                         print(end_screen)
                         game_won = False
 
