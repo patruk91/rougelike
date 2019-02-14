@@ -46,7 +46,7 @@ def display_inventory(inventory):
         if type(keys) == str:
             list_of_items.append(keys)
     print("Inventory:")
-    string = "{},\t" * len(list_of_items)
+    string = "{}, " * len(list_of_items)
     print(string.format(*list_of_items))
 
         

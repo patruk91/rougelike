@@ -8,7 +8,6 @@ def handle_interaction(character, items, char_stats, inv):
         loot = items.items.weapons()
         char_stats["ATC"] += loot[1]
         inventory.inventory.add_to_inventory(inv, loot)
-        # del inv[loot[1]]
     elif character == "F":
         loot = items.items.food()
         if char_stats["HP"] < 100:
@@ -18,6 +17,7 @@ def handle_interaction(character, items, char_stats, inv):
     elif character == "C":
         loot = items.items.clotches()
         char_stats["DEF"] += loot[1]
+        inventory.inventory.add_to_inventory(inv, loot)
     elif character == "&":
         damage = 10
         char_stats = hot_cold.fight(char_stats, damage)
