@@ -24,7 +24,7 @@ def print_error(message):
 
 
 def menu_option():
-    print("""Hammer of Justice Menu
+    print("""\n\nHammer of Justice:
 (1)Play Game
 (2)High score
 (3)Credits
@@ -86,7 +86,7 @@ def press_enter():
 
 def show_scoreboard(users_score_ordered):
     print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
-    print('TOP 10 HIGH SCORE:\n')
+    print('\n\nTOP 10 HIGH SCORE:\n')
     for i in range(10):
         entry = users_score_ordered[i]
         string = "{:3}. {:20} Time: {:10} Score: {:8}"

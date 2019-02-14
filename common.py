@@ -111,7 +111,8 @@ def order_list(users_score):
 
 def handle_credentials():
     os.system('clear')
-    print("HAMMER OF JUSTICE DEVELOPMENT GROUP:\n")
+    print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
+    print("\n\nHAMMER OF JUSTICE DEVELOPMENT GROUP:\n")
     print("Krzysztof Czaja\n", "\nKonrad Krzysztofiak\n", "\nPatryk Lichwała\n")
     ui.press_enter()
     movement.get_char_in_terminal()

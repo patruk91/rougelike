@@ -18,7 +18,7 @@ def menu():
             print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
             is_name_correct = False
             while not is_name_correct:
-                name = ui.get_user_name("Enter your name: ")
+                name = ui.get_user_name("\n\nEnter your name: ")
                 if common.validate_string_input(name):
                     is_name_correct = True
             os.system('clear')
