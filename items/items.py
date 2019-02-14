@@ -14,7 +14,7 @@ def food():
 
 
 def clotches():
-    clothes_list = [("brass helmet", 3), ("rainbow shield", 10),
-                    ("doran shield", 2), ("plate armor", 5),
-                    ("steel boots", 4), ("golden legs", 8)]
+    clothes_list = [("brass helmet", 1), ("rainbow shield", 4),
+                    ("doran shield", 1), ("plate armor", 2),
+                    ("steel boots", 1), ("golden legs", 3)]
     return clothes_list[random.randint(0, len(clothes_list)-1)]
