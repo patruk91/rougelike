@@ -8,8 +8,8 @@ def weapons():
 
 
 def food():
-    food_list = [("ham", 6), ("meat", 4), ("melon", 2), ("apple", 1),
-                 ("cake", 5), ("sweets", 2)]
+    food_list = [("ham", 10), ("meat", 6), ("melon", 6), ("apple", 5),
+                 ("cake", 5), ("sweets", 4)]
     return food_list[random.randint(0, len(food_list)-1)]
 
 
