@@ -12,3 +12,9 @@ def load_ascii_art(file_name):
         for art in file_object:
             art = file_object.read()
     return art
+
+
+def save_final_score(file_name, user_score):
+    with open(file_name, "a+") as my_file:
+        user_score = ';'.join(user_score)
+        my_file.write(user_score + "\n")
