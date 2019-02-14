@@ -26,8 +26,8 @@ def print_error(message):
 def menu_option():
     print("""Hammer of Justice Menu
 (1)Play Game
-(2)Highscore
-(3)Sth
+(2)High score
+(3)Credits
 (4)Exit Game""")
     answer = input("\nChoose option: ")
     return answer
