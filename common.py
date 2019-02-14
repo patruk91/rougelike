@@ -107,3 +107,12 @@ def order_list(users_score):
     users_score = list(reversed(sorted(users_score, key=lambda x: x[2])))
 
     return users_score
+
+
+def handle_credentials():
+    os.system('clear')
+    print("HAMMER OF JUSTICE DEVELOPMENT GROUP:\n")
+    print("Krzysztof Czaja\n", "\nKonrad Krzysztofiak\n", "\nPatryk Lichwała\n")
+    ui.press_enter()
+    movement.get_char_in_terminal()
+    os.system('clear')

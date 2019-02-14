@@ -36,7 +36,7 @@ def menu():
             elif answer == "2":
                 common.handle_user_scoreboard()
             elif answer == "3":
-                pass
+                common.handle_credentials()
 
 
 def main():
