@@ -44,9 +44,10 @@ def display_map_instructions():
 def display_inventory(inventory):
     list_of_items = []
     for keys in inventory.keys():
-        list_of_items.append(keys)
+        if type(keys) == str:
+            list_of_items.append(keys)
     print("Inventory:")
-    string = "{},\t" * len(list_of_items)
+    string = "{}, " * len(list_of_items)
     print(string.format(*list_of_items))
 
 
