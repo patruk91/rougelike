@@ -28,13 +28,12 @@ def engine_work(char_stats, inv, map_iterator):
         if common.check_if_item_interaction(new_hero_coordinates, level_map):
             character = common.get_character_at_position(level_map, new_hero_coordinates)
             map_iterator = interaction.increment_map_iterator(map_iterator, character)
+            inv = interaction.handle_interaction(character, items, char_stats, inv)
+            game_won = handle_game_won_boss(char_stats, character, game_won, map_iterator)
+
             if map_iterator < 4 and character == "D":
                 level_map = data_manager.get_maps_from_file(LEVELS_NAME[map_iterator])
                 hero_coordinates = HERO_BEGIN_POSITION[map_iterator]
-
-            game_won = handle_game_won_boss(char_stats, character, game_won, map_iterator)
-            char_stats = interaction.handle_interaction(character, map_iterator, items, char_stats, inv)
-
 
             if game_won != False:
                 level_map = movement.update_map(get_char, level_map, new_hero_coordinates, hero_coordinates)
