@@ -24,7 +24,6 @@ def handle_interaction(character, items, char_stats, inv):
         if char_stats["HP"] <= 0:
             end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
             print(end_screen)
-    print(inv)
     return inv
 
 

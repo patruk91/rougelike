@@ -1,4 +1,5 @@
 import os
+import time
 
 
 def show_character_creation_screen(char_stats, free_points):
@@ -49,7 +50,7 @@ def display_inventory(inventory):
     string = "{}, " * len(list_of_items)
     print(string.format(*list_of_items))
 
-        
+
 def display_level_map(level_map, char_stats, inv):
     """
     Display map to user
@@ -65,3 +66,18 @@ def display_level_map(level_map, char_stats, inv):
     display_inventory(inv)
 
 
+def print_score(char_stats, play_time, final_score):
+    play_time = time.strftime('%H:%M:%S', time.gmtime(play_time))
+    string = "\n\nYou played for {} and gainded {} EXP points. Your final score is {}\n\n"
+    formating = [play_time, char_stats["EXP"] + 10 * (char_stats["LVL"] - 1), final_score]
+    print(string.format(*formating))
+
+
+def get_user_name(question):
+    name = input(question)
+
+    return name
+
+
+def press_enter():
+    print("Press something to continue")
