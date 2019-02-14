@@ -70,3 +70,13 @@ def print_score(char_stats, play_time, final_score):
     string = "\n\nYou played for {} and gainded {} EXP points. Your final score is {}\n\n"
     formating = [play_time, char_stats["EXP"] + 10 * (char_stats["LVL"] - 1), final_score]
     print(string.format(*formating))
+
+
+def get_user_name(question):
+    name = input(question)
+
+    return name
+
+
+def press_enter():
+    print("Press something to continue")

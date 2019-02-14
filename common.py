@@ -74,7 +74,7 @@ def get_character_at_position(level_map, new_hero_coordinates):
 def game_time(start_time):
     end_time = time.time()
     time_ = round(end_time - start_time, 2)
-    # time.strftime('%H:%M:%S', time.gmtime(time_))
+
     return time_
 
 
@@ -82,6 +82,6 @@ def get_user_score(char_stats, play_time):
     exp = char_stats["EXP"]
     if char_stats["EXP"] == 0:
         exp = 1
-    final_score = int(char_stats["EXP"] * 3.14 * int(play_time))
+    final_score = str(int(char_stats["EXP"] * 3.14 * int(play_time)))
 
     return final_score

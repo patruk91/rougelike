@@ -12,7 +12,16 @@ def menu():
     char_creation = True
     answer = ""
     os.system('clear')
+    name = ""
     while answer != "4":
+        if not name:
+            print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
+            is_name_correct = False
+            while not is_name_correct:
+                name = ui.get_user_name("Enter your name: ")
+                if common.validate_string_input(name):
+                    is_name_correct = True
+            os.system('clear')
         print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
         answer = ui.menu_option()
         if common.validate_string_input(answer, condition=["1", "2", "3", "4"]):
@@ -22,7 +31,7 @@ def menu():
                 os.system('clear')
 
                 # start engine module
-                engine.engine_work(char_stats, inv, map_iterator)
+                engine.engine_work(char_stats, inv, map_iterator, name)
 
             elif answer == "2":
                 pass
