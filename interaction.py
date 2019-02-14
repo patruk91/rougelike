@@ -2,6 +2,7 @@ import inventory.inventory
 import data_manager
 import hot_cold
 
+
 def handle_interaction(character, map_iterator, items, char_stats, inv):
     if character == "W":
         loot = items.items.weapons()
@@ -24,5 +25,9 @@ def handle_interaction(character, map_iterator, items, char_stats, inv):
             end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
             print(end_screen)
     elif character == "D":
-        map_iterator += 1
+        pass
+
+
+def increment_map_iterator(map_iterator):
+    map_iterator += 1
     return map_iterator
