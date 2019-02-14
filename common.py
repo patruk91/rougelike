@@ -1,5 +1,6 @@
 import ui
 import data_manager
+import time
 
 
 def validate_string_input(string, condition=""):
@@ -68,3 +69,19 @@ def get_character_at_position(level_map, new_hero_coordinates):
     y_position = new_hero_coordinates[1]
     character = level_map[y_position][x_position]
     return character
+
+
+def game_time(start_time):
+    end_time = time.time()
+    time_ = round(end_time - start_time, 2)
+    # time.strftime('%H:%M:%S', time.gmtime(time_))
+    return time_
+
+
+def get_user_score(char_stats, play_time):
+    exp = char_stats["EXP"]
+    if char_stats["EXP"] == 0:
+        exp = 1
+    final_score = int(char_stats["EXP"] * 3.14 * int(play_time))
+
+    return final_score

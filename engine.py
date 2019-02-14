@@ -6,6 +6,7 @@ import data_manager
 import common
 import ui
 import os
+import time
 
 
 
@@ -15,6 +16,7 @@ LEVELS_NAME = ['levels/level1.txt', 'levels/level2.txt', 'levels/level3.txt', 'l
 
 
 def engine_work(char_stats, inv, map_iterator):
+    start_time = time.time()
     get_char = ""
     hero_coordinates = HERO_BEGIN_POSITION[map_iterator]
     level_map = data_manager.get_maps_from_file(LEVELS_NAME[map_iterator])
@@ -31,6 +33,9 @@ def engine_work(char_stats, inv, map_iterator):
 
             if character == "&":
                 if char_stats["HP"] <= 0:
+                    play_time = common.game_time(start_time)
+                    final_score = common.get_user_score(char_stats, play_time)
+                    ui.print_score(char_stats, play_time, final_score)
                     game_won = False
             if character == "D":
                 if map_iterator < 4:
@@ -42,11 +47,17 @@ def engine_work(char_stats, inv, map_iterator):
                     if char_stats["HP"] > 0:
                         end_screen = data_manager.load_ascii_art("ascii_art/win.txt")
                         print(end_screen)
+                        play_time = common.game_time(start_time)
+                        final_score = common.get_user_score(char_stats, play_time)
+                        ui.print_score(char_stats, play_time, final_score)
                         game_won = False
 
                     else:
                         end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
                         print(end_screen)
+                        play_time = common.game_time(start_time)
+                        final_score = common.get_user_score(char_stats, play_time)
+                        ui.print_score(char_stats, play_time, final_score)
                         game_won = False
 
             if game_won != False:
