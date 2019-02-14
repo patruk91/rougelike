@@ -12,25 +12,30 @@ def get_random_int(range_start, range_end):
     return number
 
 
-def check_guess(char_stats, number, numbers_end_range, damage):
+def check_guess(char_stats, number, numbers_end_range, damage, file_name):
     # guess = int(input("Enter an integer from 1 to {}: ".format(numbers_end_range)))
     guess = 999
     os.system('clear')
+    print(data_manager.load_ascii_art(file_name))
     while number != guess and char_stats["HP"] > 0:
-        print("FIGHT")
         ui.print_character_statistics(char_stats)
         guess = input("Enter an integer from 1 to {}: ".format(numbers_end_range))
         if common.check_is_number(guess, numbers_end_range):
             guess = int(guess)
             os.system('clear')
             if guess < number:
-                print("guess is low")
+                print(data_manager.load_ascii_art(file_name))
+                print("{} is to low".format(guess))
                 if (damage - char_stats["DEF"]) >= 0:
                     char_stats["HP"] -= (damage - char_stats["DEF"])
             elif guess > number:
-                print("guess is high")
+                print(data_manager.load_ascii_art(file_name))
+                print("{} is to high".format(guess))
                 if (damage - char_stats["DEF"]) >= 0:
                     char_stats["HP"] -= (damage - char_stats["DEF"])
+        else:
+            os.system('clear')
+            print(data_manager.load_ascii_art(file_name))
     os.system('clear')
     if char_stats["HP"] > 0:
         char_stats["EXP"] += 4
@@ -43,9 +48,9 @@ def check_guess(char_stats, number, numbers_end_range, damage):
     return char_stats
 
 
-def fight(char_stats, damage):
+def fight(char_stats, damage, file_name):
     end_range = 99 - char_stats["ATC"] * 2
     random_int = get_random_int(1, end_range)
-    char_stats = check_guess(char_stats, random_int, end_range, damage)
+    char_stats = check_guess(char_stats, random_int, end_range, damage, file_name)
 
     return char_stats

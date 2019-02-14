@@ -20,7 +20,8 @@ def handle_interaction(character, items, char_stats, inv):
         inventory.inventory.add_to_inventory(inv, loot)
     elif character == "&":
         damage = 10
-        char_stats = hot_cold.fight(char_stats, damage)
+        file_name = "ascii_art/fight_with_mob.txt"
+        char_stats = hot_cold.fight(char_stats, damage, file_name)
         if char_stats["HP"] <= 0:
             end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
             print(end_screen)

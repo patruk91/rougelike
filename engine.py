@@ -51,13 +51,11 @@ def engine_work(char_stats, inv, map_iterator, name):
             hero_coordinates = new_hero_coordinates
 
 
-
-
 def handle_game_won_boss(char_stats, character, game_won, map_iterator):
     if character == "D" and map_iterator == 4:
-
+        file_name = "ascii_art/fight_with_boss.txt"
         damage = 15
-        char_stats = hot_cold.fight(char_stats, damage)
+        char_stats = hot_cold.fight(char_stats, damage, file_name)
         if char_stats["HP"] > 0:
             end_screen = data_manager.load_ascii_art("ascii_art/win.txt")
             print(end_screen)
