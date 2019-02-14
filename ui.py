@@ -5,7 +5,8 @@ import data_manager
 
 def show_character_creation_screen(char_stats, free_points):
     os.system('clear')
-    print("CHARACTER CREATION\n")
+    print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
+    print("\n\nCHARACTER CREATION\n")
     print("Your statistics:\n{:^5} - HP\n{:^5} - DEF\n{:^5} - ATC".format(char_stats["HP"], char_stats["DEF"], char_stats["ATC"]))
     print("Points to spend for stats: {}".format(free_points))
     print("Press H to add 6 points to HP")
