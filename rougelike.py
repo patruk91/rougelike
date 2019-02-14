@@ -8,9 +8,10 @@ import character_creation.character_creation as char_cr
 
 def menu():
     map_iterator = 0
+    answer = ""
     os.system('clear')
-    while True:
-        print(data_manager.load_asci_art("asci_art/menu_art.txt"))
+    while answer != "4":
+        print(data_manager.load_ascii_ar("ascii_ar/menu_art.txt"))
         answer = ui.menu_option()
         if common.validate_string_input(answer, condition=["1", "2", "3", "4"]):
             if answer == "1":
@@ -25,12 +26,11 @@ def menu():
                 pass
             elif answer == "3":
                 pass
-            elif answer == "4":
-                exit()
 
 
 def main():
     menu()
+
 
 if __name__ == "__main__":
     main()
