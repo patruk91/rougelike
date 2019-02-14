@@ -18,3 +18,11 @@ def save_final_score(file_name, user_score):
     with open(file_name, "a+") as my_file:
         user_score = ';'.join(user_score)
         my_file.write(user_score + "\n")
+
+
+def get_user_score(file_name):
+    with open(file_name, "r") as file:
+        lines = file.readlines()
+    content = [element.rstrip().split(";") for element in lines]
+
+    return content

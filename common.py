@@ -1,6 +1,8 @@
 import ui
 import data_manager
 import time
+import os
+import movement
 
 
 def validate_string_input(string, condition=""):
@@ -85,3 +87,23 @@ def get_user_score(char_stats, play_time):
     final_score = str(int(char_stats["EXP"] * 3.14 * int(play_time)))
 
     return final_score
+
+
+def handle_user_scoreboard():
+    os.system('clear')
+    file_name = 'scoreboard.txt'
+    users_score = data_manager.get_user_score(file_name)
+    users_score_ordered = order_list(users_score)
+    ui.show_scoreboard(users_score_ordered)
+    ui.press_enter()
+    movement.get_char_in_terminal()
+    os.system('clear')
+
+
+def order_list(users_score):
+    for entry in users_score:
+        entry[2] = int(entry[2])
+
+    users_score = list(reversed(sorted(users_score, key=lambda x: x[2])))
+
+    return users_score

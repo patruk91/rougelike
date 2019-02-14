@@ -1,5 +1,6 @@
 import os
 import time
+import data_manager
 
 
 def show_character_creation_screen(char_stats, free_points):
@@ -67,7 +68,7 @@ def display_level_map(level_map, char_stats, inv):
 
 def print_score(char_stats, play_time, final_score):
     play_time = time.strftime('%H:%M:%S', time.gmtime(play_time))
-    string = "\n\nYou played for {} and gainded {} EXP points. Your final score is {}\n\n"
+    string = "\n\nYou played for {} and gainded {} EXP points. Your score is {}\n\n"
     formating = [play_time, char_stats["EXP"] + 10 * (char_stats["LVL"] - 1), final_score]
     print(string.format(*formating))
 
@@ -80,3 +81,15 @@ def get_user_name(question):
 
 def press_enter():
     print("Press something to continue")
+
+
+def show_scoreboard(users_score_ordered):
+    print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
+    print('TOP 10 HIGHSCORE:\n')
+    for i in range(10):
+        entry = users_score_ordered[i]
+        string = "{:3}. {:20} Time: {:10} Score: {:8}"
+        time_ = time.strftime('%H:%M:%S', time.gmtime(float(entry[1])))
+        formating = [i + 1, entry[0], time_, entry[2]]
+        print(string.format(*formating))
+    print("\n")

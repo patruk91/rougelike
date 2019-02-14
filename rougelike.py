@@ -34,7 +34,7 @@ def menu():
                 engine.engine_work(char_stats, inv, map_iterator, name)
 
             elif answer == "2":
-                pass
+                common.handle_user_scoreboard()
             elif answer == "3":
                 pass
 
