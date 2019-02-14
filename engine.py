@@ -27,19 +27,13 @@ def engine_work(char_stats, inv, map_iterator):
         new_hero_coordinates = movement.handle_coordinates(get_char, hero_coordinates, LEVELS_NAME[map_iterator])
         if common.check_if_item_interaction(new_hero_coordinates, level_map):
             character = common.get_character_at_position(level_map, new_hero_coordinates)
-            if character == "D":
-                map_iterator = interaction.increment_map_iterator(map_iterator)
-                if map_iterator < 4:
-                    level_map = data_manager.get_maps_from_file(LEVELS_NAME[map_iterator])
-                    hero_coordinates = HERO_BEGIN_POSITION[map_iterator]
-                else:
-                    game_won = handle_game_won_boss(char_stats)
+            map_iterator = interaction.increment_map_iterator(map_iterator, character)
+            if map_iterator < 4 and character == "D":
+                level_map = data_manager.get_maps_from_file(LEVELS_NAME[map_iterator])
+                hero_coordinates = HERO_BEGIN_POSITION[map_iterator]
 
-            elif character == "&" and char_stats["HP"] <= 0:
-                game_won = False
-
-            else:
-                interaction.handle_interaction(character, map_iterator, items, char_stats, inv)
+            game_won = handle_game_won_boss(char_stats, character, game_won, map_iterator)
+            char_stats = interaction.handle_interaction(character, map_iterator, items, char_stats, inv)
 
 
             if game_won != False:
@@ -52,16 +46,18 @@ def engine_work(char_stats, inv, map_iterator):
             hero_coordinates = new_hero_coordinates
 
 
-def handle_game_won_boss(char_stats):
-    damage = 15
-    char_stats = hot_cold.fight(char_stats, damage)
-    if char_stats["HP"] > 0:
-        end_screen = data_manager.load_ascii_art("ascii_art/win.txt")
-        print(end_screen)
-        game_won = False
+def handle_game_won_boss(char_stats, character, game_won, map_iterator):
+    if character == "D" and map_iterator == 4:
 
-    else:
-        end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
-        print(end_screen)
-        game_won = False
+        damage = 15
+        char_stats = hot_cold.fight(char_stats, damage)
+        if char_stats["HP"] > 0:
+            end_screen = data_manager.load_ascii_art("ascii_art/win.txt")
+            print(end_screen)
+            game_won = False
+
+        else:
+            end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
+            print(end_screen)
+            game_won = False
     return game_won

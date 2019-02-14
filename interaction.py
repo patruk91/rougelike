@@ -24,10 +24,10 @@ def handle_interaction(character, map_iterator, items, char_stats, inv):
         if char_stats["HP"] <= 0:
             end_screen = data_manager.load_ascii_art("ascii_art/game_over.txt")
             print(end_screen)
-    elif character == "D":
-        pass
+    return char_stats
 
 
-def increment_map_iterator(map_iterator):
-    map_iterator += 1
+def increment_map_iterator(map_iterator, character):
+    if character == "D":
+        map_iterator += 1
     return map_iterator
