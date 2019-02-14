@@ -24,12 +24,12 @@ def print_error(message):
 
 
 def menu_option():
-    print("""Rougelike Menu
+    print("""Hammer of Justice Menu
 (1)Play Game
 (2)Highscore
 (3)Sth
 (4)Exit Game""")
-    answer = input("Choose number: ")
+    answer = input("\nChoose option: ")
     return answer
 
 
@@ -86,7 +86,7 @@ def press_enter():
 
 def show_scoreboard(users_score_ordered):
     print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
-    print('TOP 10 HIGHSCORE:\n')
+    print('TOP 10 HIGH SCORE:\n')
     for i in range(10):
         entry = users_score_ordered[i]
         string = "{:3}. {:20} Time: {:10} Score: {:8}"

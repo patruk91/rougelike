@@ -9,7 +9,6 @@ import os
 import time
 
 
-
 HERO_BEGIN_POSITION = [[1, 20], [1, 13], [1, 20], [1, 16]]
 HERO_END_POSITION = [[2, 20], [2, 13], [2, 20], [2, 16]]
 LEVELS_NAME = ['levels/level1.txt', 'levels/level2.txt', 'levels/level3.txt', 'levels/level4.txt']
