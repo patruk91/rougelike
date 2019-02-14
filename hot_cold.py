@@ -33,9 +33,9 @@ def check_guess(char_stats, number, numbers_end_range, damage):
                     char_stats["HP"] -= (damage - char_stats["DEF"])
     os.system('clear')
     if char_stats["HP"] > 0:
-        char_stats["EXP"] += 2
-        if char_stats["EXP"] == 10:
-            char_stats["EXP"] = 0
+        char_stats["EXP"] += 4
+        if char_stats["EXP"] >= 10:
+            char_stats["EXP"] -= 10
             char_stats["LVL"] += 1
             char_stats = char_cr.create_character(2, char_stats)
             os.system('clear')
