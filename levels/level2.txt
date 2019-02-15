@@ -1,8 +1,8 @@
 ########################################################################################
 #         RRRR                  RRRRR                        ##            #        C  #
-#          RRRR        BBBBBB    RRR                         ##    ####    ##### & #####
-#         RRRRR           &CB   RRR      &                   ##    #  #                #
-#          RRRR        BBBBBB  RRR              BB           ##    #  ########## & #####
+#          RRRR        BBBBBB    RRR                         ##    ####    #####   #####
+#         RRRRR           &CB   RRR      &                   ##    #  #         &      #
+#          RRRR        BBBBBB  RRR              BB           ##    #  ##########   #####
 #                               RRR            BBF           ##    #           #     W #
 #       ##   RRRRR               RRR                                           #########
 #            RRRR               RRR                                                    #

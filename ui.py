@@ -97,7 +97,10 @@ def press_enter():
 def show_scoreboard(users_score_ordered):
     print(data_manager.load_ascii_art("ascii_art/menu_art.txt"))
     print('\n\nTOP 10 HIGH SCORE:\n')
-    for i in range(10):
+    top_10 = len(users_score_ordered)
+    if top_10 > 10:
+        top_10 = 10
+    for i in range(len(users_score_ordered)):
         entry = users_score_ordered[i]
         string = "{:3}. {:20} Time: {:10} Score: {:8}"
         time_ = time.strftime('%H:%M:%S', time.gmtime(float(entry[1])))
