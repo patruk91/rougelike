@@ -62,11 +62,16 @@ def display_level_map(level_map, char_stats, inv):
     """
     print_character_statistics(char_stats)
 
-    element_colors = {'#': 'grey', '@': 'red', 'B': 'green', 'W': 'magenta', '&': 'yellow',
-                      " ": "white", 'R': 'cyan', 'D': 'blue', 'C': 'magenta', 'F': 'magenta'}
+    element_colors = [['#', 'grey'], ['@', 'red'], ['B', 'green'], ['W', 'magenta'], ['&', 'yellow'],
+                      [" ", "white"], ['R', 'cyan'], ['D', 'blue'], ['C', 'magenta'], ['F', 'magenta']]
+    elements = ["#", "@", "B", "W", "&", " ", "R", "D", "C", "F"]
+    colors = ['grey', 'red', 'green', 'magenta', 'yellow', "white", 'cyan', 'blue', 'magenta', 'magenta']
     for line in level_map:
-        print("".join(termcolor.colored(element, element_colors[element]) for element in line))
-        # print("".join(line))
+        # print("".join(termcolor.colored(element, element_colors[element]) for element in line))
+        line = ("".join(line))
+        for i in range(len(element_colors)):
+            line = line.replace(elements[i], termcolor.colored(elements[i], colors[i]))
+        print(line)
 
     display_map_instructions()
     display_inventory(inv)
