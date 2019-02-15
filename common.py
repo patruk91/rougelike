@@ -81,9 +81,6 @@ def game_time(start_time):
 
 
 def get_user_score(char_stats, play_time):
-    exp = char_stats["EXP"]
-    if char_stats["EXP"] == 0:
-        exp = 1
     final_score = str(int(char_stats["EXP"] * 3.14 * int(play_time)))
 
     return final_score
