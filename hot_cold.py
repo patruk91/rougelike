@@ -19,7 +19,7 @@ def check_guess(char_stats, number, numbers_end_range, damage, file_name):
     print(data_manager.load_ascii_art(file_name))
     while number != guess and char_stats["HP"] > 0:
         ui.print_character_statistics(char_stats)
-        guess = input("Enter an integer from 1 to {}: ".format(numbers_end_range))
+        guess = input("Guess an integer from 1 to {}: ".format(numbers_end_range))
         if common.check_is_number(guess, numbers_end_range):
             guess = int(guess)
             os.system('clear')
