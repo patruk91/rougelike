@@ -30,7 +30,7 @@ def validate_string_input(string, condition=""):
             if string not in condition:
                 ui.print_error("Input must be in {}".format(condition))
                 is_string_correct = False
-
+    os.system('clear')
     return is_string_correct
 
 
