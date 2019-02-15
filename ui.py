@@ -1,7 +1,9 @@
+import termcolor
+
+
 import os
 import time
 import data_manager
-
 
 def show_character_creation_screen(char_stats, free_points):
     os.system('clear')
@@ -58,11 +60,13 @@ def display_level_map(level_map, char_stats, inv):
     Display map to user
     :param level_map: list of lists: map from text file or updated when program is running
     """
-    # need to be change to "".join..? Patryk
     print_character_statistics(char_stats)
 
+    element_colors = {'#': 'grey', '@': 'red', 'B': 'green', 'W': 'magenta', '&': 'yellow',
+                      " ": "white", 'R': 'cyan', 'D': 'blue', 'C': 'magenta', 'F': 'magenta'}
     for line in level_map:
-        print("".join(line))
+        print("".join(termcolor.colored(element, element_colors[element]) for element in line))
+        # print("".join(line))
 
     display_map_instructions()
     display_inventory(inv)
